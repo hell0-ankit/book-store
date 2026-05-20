@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  body{
+ 
+  }
+}
+
+
+/* Components */
+@layer components {
+
+.section-full{
+  @apply w-full ;
+}
+
+.container-custom{
+  @apply max-w-[1280px]  mx-auto px-4 md:px-2 lg:px-2;
+}
+
+
+.container-dashboard{
+  @apply w-full mx-auto px-3;
+}
+
+.btn{
+  @apply text-[14px] transition-all duration-500 ease-in-out py-2.5 px-5  font-[600];
+}
+
+.btn-primary {
+  @apply text-[var(--pink)] bg-[var(--white)] border border-[var(--pink)] hover:bg-[var(--pink)] hover:text-[var(--white)] shadow-sm hover:-translate-y-[2px] hover:shadow-md;
+}
+
+.btn-secondary{
+    @apply text-[var(--white)] bg-[var(--pink)] border border-[var(--pink)] hover:bg-[var(--white)] hover:text-[var(--pink)] shadow-sm hover:-translate-y-[2px] hover:shadow-md;
+}
+
+.main-heading {
+  @apply text-[32px] md:text-[48px] font-[800] tracking-tight text-[#1a1a1a] leading-tight;
+}
+.main-heading .text-pink {
+  @apply text-[var(--pink)];
+}
+
+.nav-link {
+  @apply tracking-widest text-[#1a1a1a] transition-colors duration-300 ease-out hover:text-[var(--pink)] ;
+}
+.es-out{
+  @apply transition-all duration-300 ease-out hover:-translate-y-[2px];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.btn-info{
+  @apply  bg-[var(--info)] border border-[var(--info)] text-[var(--white)] hover:text-[var(--info)] hover:bg-[var(--primary-light)];
+}
+
+.btn-danger{
+  @apply  bg-[var(--danger)] border border-[var(--danger)] text-[var(--white)] hover:text-[var(--danger)] hover:bg-[var(--primary-light)];
+}
+
+.btn-success{
+  @apply bg-[var(--success)] border border-[var(--success)] text-[var(--white)] hover:text-[var(--success)] hover:bg-[var(--primary-light)];
+}
+.btn-warning{
+  @apply btn bg-[var(--warning)] border border-[var(--warning)] text-[var(--white)] hover:text-[var(--warning)] hover:bg-[var(--primary-light)];
+}
+
+.status{
+  @apply px-4 py-3;
+}
+
+.status-tag{
+  @apply text-[var(--white)] px-3 py-1 rounded-full text-xs;
+}
+
+/* all text-font style here  */
+.primary-heading{
+  @apply text-[20px] md:text-[25px] lg:text-[30px] font-[700] text-[var(--text-heading)];
+}
+
+.secondary-heading{
+  @apply text-[18px] md:text-[22px] lg:text-[25px] font-[700] text-[var(--text-heading)];
+}
+
+.body-bold-text{
+ @apply text-[16px]  font-[700] text-[var(--text-body)];
+}
+
+.body-text{
+ @apply text-[14px]  text-[var(--text-body)];
+}
+
+/* all cards design  here  */
+.card{
+    @apply rounded-[6px] p-[20px] shadow-[rgba(0,0,0,0.1)_-4px_9px_25px_-6px] bg-[var(--white)];
+}
+
+/* all Icons design  here  */
+
+
+.icon{
+  @apply flex items-center justify-center w-[50px] h-[50px] rounded-full transition-all duration-500;
+}
+
+.small-icon{
+  @apply flex items-center justify-center w-[30px] h-[30px] p-4 rounded-full transition-all duration-500;
+}
+.icon-primary{
+  @apply border  bg-[var(--primary-light)] text-[var(--primary)]  hover:bg-[var(--primary)]  hover:text-white;
+}
+    
+
+
+
+
+
+  
+
+
+
+/* hyper link text desin here  */
+.text-link{
+  @apply text-[var(--text-body)] font-[600] hover:text-[var(--primary)] transition-all duration-300 ease-in-out hover:translate-x-[3px] hover:underline decoration-solid;
+}
+
+.custom-form-fields{
+  @apply border border-[var(--text-light)] text-[16px] px-[20px] py-4 rounded-[122px] focus:outline-1 focus:outline-[var(--primary)] focus:text-[var(--primary)] focus:font-[600];
+}
+.custom-form-btn{
+  @apply  px-[25px] py-[10px] text-[16px] cursor-pointer rounded-[122px] bg-[var(--primary)] text-[var(--white)] font-[600]  hover:bg-[var(--text-primary)] hover:text-[var(--white)] ;
+}
+
+.input{
+  @apply w-full border rounded-[6px] py-[10px] px-[10px] focus:outline-none focus:ring-1 focus:ring-[var(--primary)] focus:text-[var(--primary)];
+}
+
+}
+
+/* Utilities */
+@layer utilities {
+
+}

@@ -1,0 +1,69 @@
+
+:root {
+  --bg-main: #f3e0e8;        /* Cool off-white background */
+  --bg-card: #ffffff;        /* Pure white for book grid cards */
+  
+  /* Brand Accents */
+  --pink: #ff4a7a;           /* Electric coral-pink (Primary Buttons / Sale Badges) */
+  --pink-light: #fff0f3;     /* Soft pink mist (Hover states / Tag backgrounds) */
+  --mint: #00d2c4;           /* Refreshing mint (For 'In Stock', Ratings, or Price tags) */
+  --white:#ffff;
+  
+  /* Typography */
+  --text-heading: #0f172a;   /* Deep slate black for sharp book titles */
+  --text-body: #64748b;      /* Cool slate gray for author names & descriptions */
+}
+
+@font-face {
+    font-family: "GeorgiaPro";
+    src: url("../font/fonts.com-Georgia-Pro-Light.otf") format("opentype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "GeorgiaPro";
+    src: url("../font/fonts.com-Georgia-Pro-Regular.otf") format("opentype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "GeorgiaPro";
+    src: url("../font/fonts.com-Georgia-Pro-Semi-Bold.otf") format("opentype");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "GeorgiaPro";
+    src: url("../font/fonts.com-Georgia-Pro-Black.otf") format("opentype");
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "GeorgiaProCond";
+    src: url("../font/fonts.com-Georgia-Pro-Cond.otf") format("opentype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "GeorgiaProCond";
+    src: url("../font/fonts.com-Georgia-Pro-Cond-Light.otf") format("opentype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "GeorgiaProCond";
+    src: url("../font/fonts.com-Georgia-Pro-Cond-Semi-Bold.otf") format("opentype");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "GeorgiaProCond";
+    src: url("../font/fonts.com-Georgia-Pro-Cond-Black.otf") format("opentype");
+    font-weight: 900;
+}
+
+body {
+    font-family: "GeorgiaPro", serif;
+    background: var(--bg-main);
+    text: var(--text-body);
+}

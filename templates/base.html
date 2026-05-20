@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Basic Meta -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Primary SEO -->
+        <title>{% block title %}Book Store{% endblock %}</title>
+
+        <!-- Favicon -->
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Libraries -->
+    
+        <!-- font Family -->
+   
+        <!--  CSS -->
+        <link rel="stylesheet" href="{% static 'css/output.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+        {% block extra_css %}    {% endblock %}
+    </head>
+
+    <body>
+        {% block header %}  {% include "include/header.html" %}  {% endblock header %}
+        
+
+        {% block content %} 
+        
+        
+        {% endblock  %}
+
+
+        {% block footer %}  {% include "include/footer.html" %} {% endblock footer %}
+
+        <!-- Template Javascript -->
+        <script src="{% static 'js/main.js' %}"> </script>
+        
+        {% block scripts %}  {% endblock %}
+    </body>
+</html>
