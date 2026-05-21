@@ -7,7 +7,8 @@
   --pink: #ff4a7a;           /* Electric coral-pink (Primary Buttons / Sale Badges) */
   --pink-light: #fff0f3;     /* Soft pink mist (Hover states / Tag backgrounds) */
   --mint: #00d2c4;           /* Refreshing mint (For 'In Stock', Ratings, or Price tags) */
-  --white:#ffff;
+  --white:#ffffff;
+  --black:#000000;
   
   /* Typography */
   --text-heading: #0f172a;   /* Deep slate black for sharp book titles */

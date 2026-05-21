@@ -27,7 +27,7 @@
 }
 
 .btn{
-  @apply text-[14px] transition-all duration-500 ease-in-out py-2.5 px-5  font-[600];
+  @apply text-[14px] transition-all duration-500 ease-in-out py-2.5 px-5 rounded-lg font-[600] uppercase;
 }
 
 .btn-primary {
@@ -35,14 +35,17 @@
 }
 
 .btn-secondary{
-    @apply text-[var(--white)] bg-[var(--pink)] border border-[var(--pink)] hover:bg-[var(--white)] hover:text-[var(--pink)] shadow-sm hover:-translate-y-[2px] hover:shadow-md;
+    @apply text-[var(--mint)] bg-[var(--white)] border border-[var(--mint)] hover:bg-[var(--mint)] hover:text-[var(--white)] shadow-sm hover:-translate-y-[2px] hover:shadow-md;
 }
 
 .main-heading {
-  @apply text-[32px] md:text-[48px] font-[800] tracking-tight text-[#1a1a1a] leading-tight;
+  @apply text-[32px] md:text-[45px] font-[800] tracking-tight text-[#1a1a1a] leading-tight;
 }
 .main-heading .text-pink {
   @apply text-[var(--pink)];
+}
+.body-text{
+  @apply text-[14px] md:text-[16px] text-[var(--text-body)];
 }
 
 .nav-link {
