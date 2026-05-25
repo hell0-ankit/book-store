@@ -1,8 +1,147 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %} Cart {% endblock %}
+{% block title %}Shopping Cart - Literati Store{% endblock %}
 
 {% block content %}
+<div class="section-full-width bg-[var(--white)] border-b border-gray-100 py-6">
+    <div class="container-custom flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+        <div>
+            <h1 class="text-2xl font-bold text-[var(--text-heading)]">Your Shopping Cart</h1>
+            <p class="text-xs text-[var(--body-text)] opacity-80 mt-0.5">Review your items before proceeding to secure checkout.</p>
+        </div>
+        <div class="text-xs text-[var(--body-text)] opacity-80">
+            <a href="{% url 'home' %}" class="hover:text-[var(--pink)] transition-colors">Home</a> / <span class="text-[var(--text-heading)] font-semibold">Cart</span>
+        </div>
+    </div>
+</div>
 
+<main class="container-custom py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <div class="lg:col-span-8 space-y-4">
+            
+            <div class="hidden md:grid grid-cols-12 gap-4 bg-[var(--white)] p-4 rounded-lg border border-gray-100 text-xs font-bold uppercase tracking-wider text-gray-400">
+                <div class="col-span-6">Product Details</div>
+                <div class="col-span-2 text-center">Price</div>
+                <div class="col-span-2 text-center">Quantity</div>
+                <div class="col-span-2 text-right">Subtotal</div>
+            </div>
 
+            <div class="space-y-4">
+                
+                <div class="bg-[var(--white)] border border-gray-100 rounded-xl p-4 md:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center relative group">
+                    
+                    <div class="col-span-1 md:col-span-6 flex gap-4 items-center">
+                        <div class="w-16 h-24 bg-[var(--bg-card)] rounded-md p-1 border border-gray-50 flex items-center justify-center shrink-0">
+                            <img src="{% static 'img/book.webp' %}" alt="Book Cover" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[11px] uppercase font-bold tracking-wider text-[var(--pink)] bg-pink-50 px-2 py-0.5 rounded">Fiction</span>
+                            <h3 class="text-base font-bold text-[var(--text-heading)] line-clamp-1 hover:text-[var(--pink)] transition-colors cursor-pointer">
+                                The Whispering Forest Premium Hardcover
+                            </h3>
+                            <p class="text-xs text-[var(--body-text)] font-medium">By Elena Rostova</p>
+                            <button class="text-xs font-semibold text-red-400 hover:text-red-500 flex items-center gap-1 pt-1 md:hidden">
+                                <i class="fa-regular fa-trash-can"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-span-1 md:col-span-2 flex md:justify-center items-center gap-2 md:gap-0 text-sm">
+                        <span class="text-gray-400 md:hidden font-medium text-xs">Price:</span>
+                        <span class="font-bold text-[var(--text-heading)]">$20.00</span>
+                    </div>
+
+                    <div class="col-span-1 md:col-span-2 flex md:justify-center items-center gap-2 md:gap-0">
+                        <span class="text-gray-400 md:hidden font-medium text-xs">Qty:</span>
+                        <div class="flex items-center border border-gray-200 rounded-md bg-white shadow-sm overflow-hidden h-9">
+                            <button type="button" onclick="adjustCartQty(this, -1)" class="px-2.5 text-gray-500 hover:bg-gray-50 transition-colors font-bold h-full text-xs">-</button>
+                            <input type="number" value="1" min="1" class="w-10 text-center text-xs font-bold border-none focus:ring-0 bg-transparent text-[var(--text-heading)] pointer-events-none">
+                            <button type="button" onclick="adjustCartQty(this, 1)" class="px-2.5 text-gray-500 hover:bg-gray-50 transition-colors font-bold h-full text-xs">+</button>
+                        </div>
+                    </div>
+
+                    <div class="col-span-1 md:col-span-2 flex md:justify-end items-center justify-between md:justify-self-end w-full text-sm">
+                        <span class="text-gray-400 md:hidden font-medium text-xs">Subtotal:</span>
+                        <span class="font-extrabold text-[var(--mint)] text-base md:text-right">$20.00</span>
+                    </div>
+
+                    <button class="hidden md:flex absolute top-4 right-4 w-6 h-6 rounded-full border border-gray-100 bg-white items-center justify-center text-gray-400 hover:text-red-500 hover:border-red-100 transition-all opacity-0 group-hover:opacity-100 shadow-sm">
+                        <i class="fa-solid fa-xmark text-xs"></i>
+                    </button>
+                </div>
+
+                </div>
+
+            <div class="pt-2">
+                <a href="{% url 'home' %}" class="inline-flex items-center gap-2 text-sm font-bold text-[var(--pink)] hover:underline">
+                    <i class="fa-solid fa-arrow-left-long"></i> Continue Shopping
+                </a>
+            </div>
+        </div>
+
+        <div class="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
+            
+            <div class="bg-[var(--white)] border border-gray-200 rounded-xl p-5 md:p-6 shadow-sm space-y-4">
+                <h2 class="text-lg font-bold text-[var(--text-heading)] border-b border-gray-100 pb-3">Order Summary</h2>
+                
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between items-center text-[var(--body-text)]">
+                        <span>Subtotal (1 Items)</span>
+                        <span class="font-semibold text-[var(--text-heading)]">$20.00</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[var(--body-text)]">
+                        <span>Shipping Estimate</span>
+                        <span class="text-[var(--mint)] font-medium">FREE</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[var(--body-text)]">
+                        <span>Estimated Tax</span>
+                        <span class="font-semibold text-[var(--text-heading)]">$0.00</span>
+                    </div>
+                    
+                    <hr class="border-gray-100 my-2">
+                    
+                    <div class="flex justify-between items-baseline pt-1">
+                        <span class="text-base font-bold text-[var(--text-heading)]">Order Total</span>
+                        <span class="text-2xl font-extrabold text-[var(--mint)]">$20.00</span>
+                    </div>
+                </div>
+               
+                <div class="pt-2">
+                    <a href="{% url 'checkout' %}" class="w-full h-12 btn btn-primary text-sm font-bold uppercase tracking-wider rounded-lg transition-all flex items-center justify-center gap-2 shadow-sm">
+                        <span>Proceed To Checkout</span>
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-xl bg-[var(--bg-card)] p-4 flex items-center gap-4 text-xs">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-[var(--mint)] shrink-0 text-lg">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div class="space-y-0.5">
+                    <h4 class="font-bold text-[var(--text-heading)]">100% Secure Encrypted Checkouts</h4>
+                    <p class="text-[var(--body-text)] opacity-80">Your privacy and data logistics parameters are safeguarded rules.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<script>
+    function adjustCartQty(button, amount) {
+        // Traverses DOM to target sibling input box
+        const container = button.parentElement;
+        const input = container.querySelector('input');
+        let current = parseInt(input.value) || 1;
+        
+        current += amount;
+        if (current < 1) current = 1;
+        input.value = current;
+
+        // Note: Future AJAX functionality triggers update requests back to Django view here.
+    }
+</script>
 {% endblock %}

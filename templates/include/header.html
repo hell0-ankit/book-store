@@ -27,9 +27,9 @@
             <!-- CENTER: Desktop Navigation Links (Hidden on Mobile/Tablet) -->
             <div class="nav-item hidden xl:block">
                 <ul class="flex items-center gap-6 lg:gap-8 text-[13px] uppercase font-[600]">
-                    <li><a href="#" class="nav-link tracking-widest inline-block es-out  hover:text-[var(--pink)] ">Home</a></li>
-                    <li><a href="#"  class="nav-link tracking-widest inline-block es-out  hover:text-[var(--pink)] ">About Us</a> </li>
-                    <li> <a href="#" class="nav-link tracking-widest inline-block es-out  hover:text-[var(--pink)] ">Shop</a> </li>
+                    <li><a href="{% url 'home' %}" class="nav-link tracking-widest inline-block es-out  hover:text-[var(--pink)] ">Home</a></li>
+                    <li><a href="{% url 'about-us' %}"  class="nav-link tracking-widest inline-block es-out  hover:text-[var(--pink)] ">About Us</a> </li>
+                    <li> <a href="{% url 'product-listing' %}" class="nav-link tracking-widest inline-block es-out  hover:text-[var(--pink)] ">Shop</a> </li>
                     <li> <a href="#"  class="nav-link tracking-widest inline-block es-out  hover:text-[var(--pink)] ">  Collection </a> </li>
                     <li> <a href="#" class="nav-link tracking-widest inline-block hover:text-[var(--pink)] es-out">Contact Us</a> </li>
                 </ul>

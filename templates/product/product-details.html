@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}{{ book.title|default:"Product Detail" }} - Literati Store{% endblock %}
+{% block title %}Product Details{% endblock %}
 
 {% block content %}
 <main class="container-custom px-4 py-8">
-    
     <nav class="text-sm font-medium mb-8 text-[var(--body-text)] opacity-80">
         <a href="{% url 'home' %}" class="hover:text-[var(--pink)] transition-colors">Home</a>
         <span class="mx-2">/</span>
         <a href="#" class="hover:text-[var(--pink)] transition-colors">Books</a>
         <span class="mx-2">/</span>
-        <span class="text-[var(--text-heading)] font-semibold">{{ book.title|default:"The Whispering Forest" }}</span>
+        <span class="text-[var(--text-heading)] font-semibold">Book Title Name</span>
     </nav>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-14">
@@ -18,7 +17,7 @@
         <div class="lg:col-span-5 flex flex-col gap-4">
             <div class="border border-gray-100 rounded-xl bg-[var(--bg-card)] p-6 flex items-center justify-center h-[420px] md:h-[500px] relative group shadow-sm">
                 <span class="absolute top-4 left-4 bg-[var(--mint)] text-[var(--white)] text-[12px] font-bold px-2.5 py-1 rounded-sm">
-                    Sale
+                    9%
                 </span>
                 <img id="main-product-image" src="{% static 'img/book.webp' %}" 
                      alt="Main Book Cover" 
@@ -35,40 +34,38 @@
                 <button onclick="changeImage(this.children[0].src)" class="border border-gray-200 rounded-lg p-2 bg-[var(--bg-card)] h-24 flex items-center justify-center hover:border-[var(--pink)] transition-all">
                     <img src="{% static 'img/book.webp' %}" class="max-h-full object-contain opacity-70">
                 </button>
-                <button onclick="changeImage(this.children[0].src)" class="border border-gray-200 rounded-lg p-2 bg-[var(--bg-card)] h-24 flex items-center justify-center hover:border-[var(--pink)] transition-all">
-                    <img src="{% static 'img/book.webp' %}" class="max-h-full object-contain opacity-70">
-                </button>
+              
+
             </div>
         </div>
 
         <div class="lg:col-span-7 flex flex-col justify-between">
             <div class="space-y-4">
                 <div class="flex flex-wrap items-center gap-3">
-                    <span class="text-xs uppercase font-bold tracking-widest text-[var(--pink)] bg-pink-50 px-2.5 py-1 rounded">Fiction & Literature</span>
-                    <span class="text-xs text-gray-400 font-medium">SKU: LIT-774921</span>
+                    <span class="text-xs uppercase font-bold tracking-widest text-[var(--pink)] bg-pink-50 px-2.5 py-1 rounded">ISBN: LIT-774921</span>
                 </div>
 
                 <h1 class="text-2xl md:text-4xl font-bold tracking-tight text-[var(--text-heading)] leading-tight">
-                    {{ book.title|default:"The Whispering Forest Premium Hardcover" }}
+                    The Whispering Forest Premium Hardcover
                 </h1>
 
                 <p class="text-md text-[var(--body-text)] font-medium">
                     By <a href="#" class="text-[var(--pink)] hover:underline">Elena Rostova</a> (Author)
                 </p>
 
-                <div class="flex items-center gap-3 pt-1">
+                {% comment %} <div class="flex items-center gap-3 pt-1">
                     <div class="flex text-amber-400 text-sm">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                     </div>
                     <span class="text-xs text-gray-400 font-medium">(4.8 Stars / 124 Reviews)</span>
-                </div>
+                </div> {% endcomment %}
 
                 <hr class="border-gray-100 my-4">
 
                 <div class="flex items-baseline gap-3">
-                    <span class="text-3xl font-extrabold text-[var(--mint)]">$20.00</span>
-                    <span class="text-md line-through text-gray-300 font-medium">$22.00</span>
-                    <span class="text-xs bg-green-50 text-[var(--mint)] px-2 py-0.5 rounded font-bold">Save $2.00</span>
+                    <span class="text-3xl font-extrabold text-[var(--mint)]">₹ 20.00</span>
+                    <span class="text-md line-through text-[var(--body-text)] font-medium">₹ 22.00</span>
+                    <span class="text-xs bg-green-50 text-[var(--mint)] px-2 py-0.5 rounded font-bold">Save ₹ 2.00</span>
                 </div>
 
                 <p class="text-[15px] leading-relaxed text-[var(--body-text)] pt-2 max-w-2xl">
@@ -77,12 +74,16 @@
 
                 <div class="grid grid-cols-2 gap-4 max-w-sm pt-4 text-xs">
                     <div class="bg-gray-50 p-3 rounded-lg flex flex-col">
-                        <span class="text-gray-400 uppercase tracking-wider font-semibold">Format</span>
-                        <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">Hardcover Book</span>
+                        <span class="text-[var(--mint)] uppercase tracking-wider font-semibold">Total Pages</span>
+                        <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">123 Pages</span>
                     </div>
                     <div class="bg-gray-50 p-3 rounded-lg flex flex-col">
-                        <span class="text-gray-400 uppercase tracking-wider font-semibold">Language</span>
+                        <span class="text-[var(--mint)] uppercase tracking-wider font-semibold">Language</span>
                         <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">English</span>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex flex-col">
+                        <span class="text-[var(--mint)] uppercase tracking-wider font-semibold">Genre</span>
+                        <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">Biography</span>
                     </div>
                 </div>
             </div>
@@ -90,17 +91,16 @@
             <div class="space-y-4 pt-6 lg:pt-0">
                 <div class="flex flex-wrap items-center gap-4">
                     <div class="flex items-center border border-gray-200 rounded-lg bg-white shadow-sm overflow-hidden h-12">
-                        <button type="button" onclick="adjustQuantity(-1)" class="px-4 text-gray-500 hover:bg-gray-50 transition-colors font-bold h-full text-base">-</button>
+                        <button type="button"  class="px-4 text-gray-500 hover:bg-gray-50 transition-colors font-bold h-full text-base">-</button>
                         <input id="quantity-input" type="number" value="1" min="1" class="w-12 text-center text-sm font-bold border-none focus:ring-0 bg-transparent text-[var(--text-heading)]">
-                        <button type="button" onclick="adjustQuantity(1)" class="px-4 text-gray-500 hover:bg-gray-50 transition-colors font-bold h-full text-base">+</button>
+                        <button type="button" class="px-4 text-gray-500 hover:bg-gray-50 transition-colors font-bold h-full text-base">+</button>
                     </div>
 
                     <button class="flex-grow md:flex-grow-0 md:px-12 h-12 btn btn-primary text-sm font-bold uppercase tracking-wider rounded-lg transition-all flex items-center justify-center gap-2 shadow-sm">
                         <i class="fa-solid fa-basket-shopping"></i>
                         <span>Add To Cart</span>
                     </button>
-
-                    <button class="w-12 h-12 border border-gray-200 rounded-lg flex items-center justify-center text-gray-400 shadow-sm transition-all hover:bg-red-50 hover:text-red-500 hover:border-red-200">
+                    <button class="w-12 h-12 border border-[var(--mint)] rounded-lg flex items-center justify-center text-[var(--mint)] shadow-sm transition-all bg-red-50 hover:text-[var(--pink)] hover:border-red-200">
                         <i class="fa-regular fa-heart text-base"></i>
                     </button>
                 </div>
@@ -132,19 +132,19 @@
 
         <div id="tab-spec" class="tab-content text-[15px] space-y-2 hidden max-w-2xl">
             <div class="grid grid-cols-3 py-2 border-b border-gray-50">
-                <span class="font-medium text-gray-400">Publisher</span>
+                <span class="font-medium text-[var(--mint)]">Publisher</span>
                 <span class="col-span-2 font-semibold text-[var(--text-heading)]">Literati Press Ltd.</span>
             </div>
             <div class="grid grid-cols-3 py-2 border-b border-gray-50">
-                <span class="font-medium text-gray-400">Publication Date</span>
+                <span class="font-medium text-[var(--mint)]">Publication Date</span>
                 <span class="col-span-2 font-semibold text-[var(--text-heading)]">May 2026</span>
             </div>
             <div class="grid grid-cols-3 py-2 border-b border-gray-50">
-                <span class="font-medium text-gray-400">Total Pages</span>
+                <span class="font-medium text-[var(--mint)]">Total Pages</span>
                 <span class="col-span-2 font-semibold text-[var(--text-heading)]">412 Pages</span>
             </div>
             <div class="grid grid-cols-3 py-2 border-b border-gray-50">
-                <span class="font-medium text-gray-400">Dimensions</span>
+                <span class="font-medium text-[var(--mint)]">Dimensions</span>
                 <span class="col-span-2 font-semibold text-[var(--text-heading)]">6.0 x 1.2 x 9.0 inches</span>
             </div>
         </div>
@@ -172,26 +172,13 @@
     </div>
 </main>
 
-<script>
-    function changeImage(src) {
-        document.getElementById('main-product-image').src = src;
-        // Event listeners can be attached to manage thumbnail borders dynamically
-    }
 
-    function adjustQuantity(amount) {
-        const input = document.getElementById('quantity-input');
-        let current = parseInt(input.value) || 1;
-        current += amount;
-        if(current < 1) current = 1;
-        input.value = current;
-    }
+<script>
 
     function toggleTab(tabId, buttonElement) {
-        // Clear all active content panels
         document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
         document.getElementById(tabId).classList.remove('hidden');
 
-        // Manage typography styling on switches
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.remove('text-[var(--pink)]', 'border-b-2', 'border-[var(--pink)]');
             btn.classList.add('text-gray-400');
@@ -200,4 +187,5 @@
         buttonElement.classList.remove('text-gray-400');
     }
 </script>
+
 {% endblock %}

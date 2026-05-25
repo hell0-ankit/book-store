@@ -55,3 +55,17 @@ new Swiper(".category-slider", {
       1024: { slidesPerView: 4 }
     }
   });
+
+
+// toggleTab Product details page... 
+ function toggleTab(tabId, buttonElement) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+        document.getElementById(tabId).classList.remove('hidden');
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('text-[var(--pink)]', 'border-b-2', 'border-[var(--pink)]');
+            btn.classList.add('text-gray-400');
+        });
+        buttonElement.classList.add('text-[var(--pink)]', 'border-b-2', 'border-[var(--pink)]');
+        buttonElement.classList.remove('text-gray-400');
+    }
