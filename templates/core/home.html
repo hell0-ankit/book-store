@@ -13,13 +13,13 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
       
       <!-- Left Column: Content -->
-      <div class="space-y-6 text-center md:text-left">
+      <div class="slide-left space-y-6 text-center md:text-left">
         <span class="inline-block text-xs font-semibold tracking-widest text-[var(--pink)] uppercase ">
           Welcome to Sona Book Store
         </span>
         
         <!-- Marcellus Font for Headings -->
-        <h1 class="main-heading ">
+        <h1 class="main-heading fade-up-heading ">
           Discover Your Next <br />
           <span class="text-pink">Great Adventure</span>
         </h1>
@@ -60,7 +60,7 @@
       </div>
 
       <!-- Right Column: Image Presentation Layer -->
-      <div class="relative flex justify-center items-center">
+      <div class="zoom-in relative flex justify-center items-center">
         <!-- Background Soft Luxury Glow Circle -->
         <div class="absolute w-72 h-72 sm:w-[420px] sm:h-[420px] bg-[#EFEBE4] rounded-full filter blur-2xl opacity-80 -z-10"></div>
         
@@ -74,7 +74,7 @@
           <img 
             src="{% static 'img/book.webp' %}" 
             alt="Featured Book Collection" 
-            class="w-full h-auto object-cover rounded-xl shadow-md transition-transform duration-500 group-hover:scale-[1.02]"
+            class="  w-full h-auto object-cover rounded-xl shadow-md transition-transform duration-500 group-hover:scale-[1.02]"
           >
           
         </div>
@@ -89,7 +89,7 @@
 <div class="w-full max-w-7xl mx-auto px-4 py-12">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     
-    <div class="relative rounded-2xl flex items-center overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-500 min-h-[220px] sm:min-h-[260px] p-6 sm:p-8">
+    <div class="slide-left relative rounded-2xl flex items-center overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-500 min-h-[220px] sm:min-h-[260px] p-6 sm:p-8">
       
       <div 
         style="background-color: var(--bg-main); background-image: url('{% static 'img/book1.png' %}');" 
@@ -104,7 +104,7 @@
           <span style="color: var(--pink);" class="text-xs font-black tracking-widest uppercase mb-1 sm:mb-2">
             Best Selling Authors
           </span>
-          <h2 style="color: var(--text-heading);" class="text-xl sm:text-2xl lg:text-3xl font-black  leading-tight mb-4 sm:mb-6">
+          <h2 style="color: var(--text-heading);" class="fade-up-heading text-xl sm:text-2xl lg:text-3xl font-black  leading-tight mb-4 sm:mb-6">
             Premium Fiction <br class="hidden sm:inline"> Bundles
           </h2>
           <a href="#" class="btn btn-primary">
@@ -114,7 +114,7 @@
       </div>
     </div>
 
-    <div class="relative rounded-2xl flex items-center overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-500 min-h-[220px] sm:min-h-[260px] p-6 sm:p-8">
+    <div class="slide-right relative rounded-2xl flex items-center overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-500 min-h-[220px] sm:min-h-[260px] p-6 sm:p-8">
       
       <div 
         style="background-color: var(--pink-light); background-image: url('{% static 'img/book2.png' %}');" 
@@ -129,7 +129,7 @@
           <span style="color: var(--mint);" class="text-xs font-black tracking-widest uppercase mb-1 sm:mb-2">
             Smart Learning Tech
           </span>
-          <h2 style="color: var(--text-heading);" class="text-xl sm:text-2xl lg:text-3xl font-black leading-tight mb-4 sm:mb-6">
+          <h2 style="color: var(--text-heading);" class=" fade-up-heading text-xl sm:text-2xl lg:text-3xl font-black leading-tight mb-4 sm:mb-6">
             Academic & <br class="hidden sm:inline"> Career Guides
           </h2>
           <a href="#" class="btn btn-secondary">
@@ -145,10 +145,10 @@
 
 </section>
 
-<section class="relative  w-full max-w-7xl mx-auto px-14 py-20  group/slider">
-  <div class="swiper category-slider overflow-hidden">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide flex justify-center">
+<section class="stagger-wrapper relative  w-full max-w-7xl mx-auto px-14 py-20  group/slider">
+  <div class=" swiper category-slider overflow-hidden">
+    <div class=" swiper-wrapper">
+      <div class="stagger-item swiper-slide flex justify-center">
         <div class="w-[220px] h-[240px] bg-[var(--bg-card)] border border-[var(--white)] rounded-xl p-6 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-[var(--pink)] hover:shadow-md cursor-pointer group">
           <div class="w-16 h-16 mb-5 flex items-center justify-center bg-[var(--pink-light)] rounded-full shadow-sm transition-transform duration-300 group-hover:scale-110">
             <img src="{% static 'img/healthcare.png' %}" alt="Health" class="w-10 h-10 object-contain">
@@ -158,7 +158,7 @@
         </div>
       </div>
 
-      <div class="swiper-slide flex justify-center">
+      <div class="stagger-item  swiper-slide flex justify-center">
         <div class="w-[220px] h-[240px] bg-[var(--bg-card)] border border-[var(--white)] rounded-xl p-6 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-[var(--pink)] hover:shadow-md cursor-pointer group">
           <div class="w-16 h-16 mb-5 flex items-center justify-center bg-[var(--pink-light)] rounded-full shadow-sm transition-transform duration-300 group-hover:scale-110">
             <img src="{% static 'img/healthcare.png' %}" alt="Health" class="w-10 h-10 object-contain">
@@ -168,7 +168,7 @@
         </div>
       </div>
 
-      <div class="swiper-slide flex justify-center">
+      <div class="stagger-item  swiper-slide flex justify-center">
         <div class="w-[220px] h-[240px] bg-[var(--bg-card)] border border-[var(--white)] rounded-xl p-6 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-[var(--pink)] hover:shadow-md cursor-pointer group">
           <div class="w-16 h-16 mb-5 flex items-center justify-center bg-[var(--pink-light)] rounded-full shadow-sm transition-transform duration-300 group-hover:scale-110">
             <img src="{% static 'img/healthcare.png' %}" alt="Health" class="w-10 h-10 object-contain">
@@ -178,7 +178,7 @@
         </div>
       </div>
 
-      <div class="swiper-slide flex justify-center">
+      <div class="stagger-item  swiper-slide flex justify-center">
         <div class="w-[220px] h-[240px] bg-[var(--bg-card)] border border-[var(--white)] rounded-xl p-6 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-[var(--pink)] hover:shadow-md cursor-pointer group">
           <div class="w-16 h-16 mb-5 flex items-center justify-center bg-[var(--pink-light)] rounded-full shadow-sm transition-transform duration-300 group-hover:scale-110">
             <img src="{% static 'img/healthcare.png' %}" alt="Health" class="w-10 h-10 object-contain">
@@ -188,7 +188,7 @@
         </div>
       </div>
 
-      <div class="swiper-slide flex justify-center">
+      <div class="stagger-item  swiper-slide flex justify-center">
         <div class="w-[220px] h-[240px] bg-[var(--bg-card)] border border-[var(--white)] rounded-xl p-6 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-[var(--pink)] hover:shadow-md cursor-pointer group">
           <div class="w-16 h-16 mb-5 flex items-center justify-center bg-[var(--pink-light)] rounded-full shadow-sm transition-transform duration-300 group-hover:scale-110">
             <img src="{% static 'img/healthcare.png' %}" alt="Health" class="w-10 h-10 object-contain">
@@ -198,7 +198,7 @@
         </div>
       </div>
 
-      <div class="swiper-slide flex justify-center">
+      <div class="stagger-item  swiper-slide flex justify-center">
         <div class="w-[220px] h-[240px] bg-[var(--bg-card)] border border-[var(--white)] rounded-xl p-6 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-[var(--pink)] hover:shadow-md cursor-pointer group">
           <div class="w-16 h-16 mb-5 flex items-center justify-center bg-[var(--pink-light)] rounded-full shadow-sm transition-transform duration-300 group-hover:scale-110">
             <img src="{% static 'img/healthcare.png' %}" alt="Health" class="w-10 h-10 object-contain">
@@ -222,14 +222,14 @@
 
 
 <section class="relative w-full max-w-7xl mx-auto px-12 py-10">
-  <h1 class="main-heading text-center  mb-10 tracking-tight">
+  <h1 class="fade-up-heading main-heading text-center  mb-10 tracking-tight">
           Latest
           <span class="text-pink">Products</span>
         </h1>
 
-  <div class="swiper product-slider overflow-hidden  ">
+  <div class="stagger-wrapper swiper product-slider overflow-hidden  ">
     <div class="swiper-wrapper">
-      <div class="swiper-slide flex flex-col border  rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+      <div class="stagger-item  swiper-slide flex flex-col border  rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -254,12 +254,12 @@
         </div>
       </div>
 
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
-            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="fa-regular fa-heart text-sm"></i></a>
-            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="fa-regular fa-heart text-sm"></i></a>
+            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)]  hover:text-white hover:border-[var(--pink)]">  <i class=" fa-regular fa-heart text-sm"></i></a>
+            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="icon-hover fa-regular fa-heart text-sm"></i></a>
           </div>
         </div>
         <div class="w-full h-48 flex items-center justify-center relative mb-4">
@@ -281,34 +281,7 @@
 
 
 
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
-        <div class="flex justify-between items-start w-full h-8 mb-2">
-          <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
-          <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
-            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="fa-regular fa-heart text-sm"></i></a>
-            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="fa-regular fa-heart text-sm"></i></a>
-          </div>
-        </div>
-        <div class="w-full h-48 flex items-center justify-center relative mb-4">
-          <img src="{% static 'img/book.webp' %}" alt="Book Title" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition-transform duration-300">
-        </div>
-
-        <div class="flex flex-col flex-grow pt-2">
-          <h3  class="font-bold text-[18px] hover:text-[var(--pink)] transition-colors">The Whisperin Forest Premium Hardcover</h3>
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-xs line-through text-gray-300 font-medium">$22</span>
-            <span class="text-sm text-[var(--mint)]">$20</span>
-          </div>
-
-          <button class="w-full btn btn-primary text-xs font-bold uppercase tracking-wider py-2.5 rounded transition-colors mt-auto">
-            Add To Cart
-          </button>
-        </div>
-      </div>
-
-
-
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -334,7 +307,8 @@
       </div>
 
 
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -360,7 +334,7 @@
       </div>
 
 
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -386,7 +360,33 @@
       </div>
 
 
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+        <div class="flex justify-between items-start w-full h-8 mb-2">
+          <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
+          <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
+            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="fa-regular fa-heart text-sm"></i></a>
+            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="fa-regular fa-heart text-sm"></i></a>
+          </div>
+        </div>
+        <div class="w-full h-48 flex items-center justify-center relative mb-4">
+          <img src="{% static 'img/book.webp' %}" alt="Book Title" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition-transform duration-300">
+        </div>
+
+        <div class="flex flex-col flex-grow pt-2">
+          <h3  class="font-bold text-[18px] hover:text-[var(--pink)] transition-colors">The Whisperin Forest Premium Hardcover</h3>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-xs line-through text-gray-300 font-medium">$22</span>
+            <span class="text-sm text-[var(--mint)]">$20</span>
+          </div>
+
+          <button class="w-full btn btn-primary text-xs font-bold uppercase tracking-wider py-2.5 rounded transition-colors mt-auto">
+            Add To Cart
+          </button>
+        </div>
+      </div>
+
+
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -467,7 +467,7 @@
     
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       
-      <div class="relative rounded-2xl flex items-center overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-500 min-h-[220px] p-6">
+      <div class=" zoom-in relative rounded-2xl flex items-center overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-500 min-h-[220px] p-6">
         <div 
           style="background-color: var(--bg-main); background-image: url('{% static 'img/book1.png' %}');" 
           class="absolute inset-0 bg-cover bg-center bg-no-repeat scale-100 group-hover:scale-105 transition-transform duration-700 ease-out z-0"
@@ -490,7 +490,7 @@
         </div>
       </div>
 
-      <div class="relative rounded-2xl flex items-center overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-500 min-h-[220px] p-6">
+      <div class="zoom-in relative rounded-2xl flex items-center overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-500 min-h-[220px] p-6">
         <div 
           style="background-color: var(--bg-main); background-image: url('{% static 'img/book1.png' %}');" 
           class="absolute inset-0 bg-cover bg-center bg-no-repeat scale-100 group-hover:scale-105 transition-transform duration-700 ease-out z-0"
@@ -513,7 +513,7 @@
         </div>
       </div>
 
-      <div class="relative rounded-2xl flex items-center overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-500 min-h-[220px] p-6">
+      <div class="zoom-in relative rounded-2xl flex items-center overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-500 min-h-[220px] p-6">
         <div 
           style="background-color: var(--bg-main); background-image: url('{% static 'img/book1.png' %}');" 
           class="absolute inset-0 bg-cover bg-center bg-no-repeat scale-100 group-hover:scale-105 transition-transform duration-700 ease-out z-0"
@@ -540,7 +540,7 @@
 </section>
 
 
-<section class="relative w-full max-w-7xl mx-auto px-12 py-10">
+<section class="stagger-wrapper relative w-full max-w-7xl mx-auto px-12 py-10">
   <h1 class="main-heading text-center  mb-10 tracking-tight">
           Featured 
           <span class="text-pink">Products</span>
@@ -548,7 +548,7 @@
 
   <div class="swiper product-slider overflow-hidden  ">
     <div class="swiper-wrapper">
-      <div class="swiper-slide flex flex-col border  rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+      <div class="stagger-item swiper-slide flex flex-col border  rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -573,34 +573,7 @@
         </div>
       </div>
 
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
-        <div class="flex justify-between items-start w-full h-8 mb-2">
-          <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
-          <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
-            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="fa-regular fa-heart text-sm"></i></a>
-            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="fa-regular fa-heart text-sm"></i></a>
-          </div>
-        </div>
-        <div class="w-full h-48 flex items-center justify-center relative mb-4">
-          <img src="{% static 'img/book.webp' %}" alt="Book Title" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition-transform duration-300">
-        </div>
-
-        <div class="flex flex-col flex-grow pt-2">
-          <h3  class="font-bold text-[18px] hover:text-[var(--pink)] transition-colors">The Whisperin Forest Premium Hardcover</h3>
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-xs line-through text-gray-300 font-medium">$22</span>
-            <span class="text-sm text-[var(--mint)]">$20</span>
-          </div>
-
-          <button class="w-full btn btn-primary text-xs font-bold uppercase tracking-wider py-2.5 rounded transition-colors mt-auto">
-            Add To Cart
-          </button>
-        </div>
-      </div>
-
-
-
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -627,7 +600,7 @@
 
 
 
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -653,7 +626,8 @@
       </div>
 
 
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -679,7 +653,7 @@
       </div>
 
 
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -705,7 +679,33 @@
       </div>
 
 
-      <div class="swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
+        <div class="flex justify-between items-start w-full h-8 mb-2">
+          <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
+          <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
+            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="fa-regular fa-heart text-sm"></i></a>
+            <a href="#" class="w-8 h-8  border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">  <i class="fa-regular fa-heart text-sm"></i></a>
+          </div>
+        </div>
+        <div class="w-full h-48 flex items-center justify-center relative mb-4">
+          <img src="{% static 'img/book.webp' %}" alt="Book Title" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition-transform duration-300">
+        </div>
+
+        <div class="flex flex-col flex-grow pt-2">
+          <h3  class="font-bold text-[18px] hover:text-[var(--pink)] transition-colors">The Whisperin Forest Premium Hardcover</h3>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-xs line-through text-gray-300 font-medium">$22</span>
+            <span class="text-sm text-[var(--mint)]">$20</span>
+          </div>
+
+          <button class="w-full btn btn-primary text-xs font-bold uppercase tracking-wider py-2.5 rounded transition-colors mt-auto">
+            Add To Cart
+          </button>
+        </div>
+      </div>
+
+
+      <div class="stagger-item swiper-slide flex flex-col border rounded-xl bg-[var(--bg-card)] border-gray-100 p-5 relative group cursor-pointer select-none">
         <div class="flex justify-between items-start w-full h-8 mb-2">
           <span  class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">-9%</span>
           <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
@@ -754,7 +754,7 @@
 
     <div class="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
       
-      <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
+      <div style="background-color: var(--bg-card);" class="brand-card  border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
         <img 
           src="{% static 'img/2.png' %}" 
           alt="Publisher Brand 1" 
@@ -762,7 +762,7 @@
         >
       </div>
 
-      <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
+      <div style="background-color: var(--bg-card);" class="brand-card  border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
         <img 
           src="{% static 'img/2.png' %}"  
           alt="Publisher Brand 2" 
@@ -770,7 +770,7 @@
         >
       </div>
 
-      <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
+      <div style="background-color: var(--bg-card);" class="brand-card  border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
         <img 
           src="{% static 'img/2.png' %}" 
           alt="Publisher Brand 3" 
@@ -778,7 +778,7 @@
         >
       </div>
 
-      <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
+      <div style="background-color: var(--bg-card);" class="brand-card  border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
         <img 
           src="{% static 'img/2.png' %}"  
           alt="Publisher Brand 4" 
@@ -786,7 +786,7 @@
         >
       </div>
 
-      <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
+      <div style="background-color: var(--bg-card);" class="brand-card  border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
         <img 
           src="{% static 'img/2.png' %}"  
           alt="Publisher Brand 5" 
@@ -794,7 +794,7 @@
         >
       </div>
 
-      <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
+      <div style="background-color: var(--bg-card);" class="brand-card  border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
         <img 
           src="{% static 'img/2.png' %}"  
           alt="Publisher Brand 6" 
@@ -802,7 +802,7 @@
         >
       </div>
 
-      <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
+      <div style="background-color: var(--bg-card);" class="brand-card  border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
         <img 
           src="{% static 'img/2.png' %}"  
           alt="Publisher Brand 7" 
@@ -810,7 +810,7 @@
         >
       </div>
 
-      <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
+      <div style="background-color: var(--bg-card);" class="brand-card  border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
         <img 
           src="{% static 'img/2.png' %}"  
           alt="Publisher Brand 8" 
@@ -818,7 +818,7 @@
         >
       </div>
 
-      <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
+      <div style="background-color: var(--bg-card);" class="brand-card  border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
         <img 
           src="{% static 'img/2.png' %}"  
           alt="Publisher Brand 9" 
@@ -826,7 +826,7 @@
         >
       </div>
 
-      <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
+      <div style="background-color: var(--bg-card);" class="brand-card  border border-gray-100 rounded-xl p-6 sm:p-8 flex items-center justify-center min-h-[120px] shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]">
         <img 
           src="{% static 'img/2.png' %}"  
           alt="Publisher Brand 10" 

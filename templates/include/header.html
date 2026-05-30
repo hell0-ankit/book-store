@@ -17,7 +17,7 @@
     <nav class="bg-[var(--white)] py-2 sticky top-0 z-50 shadow-sm">
         <menu class="container-custom flex items-center justify-between gap-4">
             <!-- LEFT: Logo (Stays left on all screens) -->
-            <div class="logo flex-shrink-0">
+            <div class="zoom-in logo flex-shrink-0">
                 <a href="#" class="block">
                     <img src="{% static 'img/logo/logodummy.png' %}"
                          alt="Logo"
@@ -25,7 +25,7 @@
                 </a>
             </div>
             <!-- CENTER: Desktop Navigation Links (Hidden on Mobile/Tablet) -->
-            <div class="nav-item hidden xl:block">
+            <div class=" nav-item hidden xl:block">
                 <ul class="flex items-center gap-6 lg:gap-8 text-[13px] uppercase font-[600]">
                     <li><a href="{% url 'home' %}" class="nav-link tracking-widest inline-block es-out  hover:text-[var(--pink)] ">Home</a></li>
                     <li><a href="{% url 'about-us' %}"  class="nav-link tracking-widest inline-block es-out  hover:text-[var(--pink)] ">About Us</a> </li>

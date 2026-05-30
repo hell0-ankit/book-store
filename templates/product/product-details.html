@@ -15,29 +15,52 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-14">
         
         <div class="lg:col-span-5 flex flex-col gap-4">
-            <div class="border border-gray-100 rounded-xl bg-[var(--bg-card)] p-6 flex items-center justify-center h-[420px] md:h-[500px] relative group shadow-sm">
-                <span class="absolute top-4 left-4 bg-[var(--mint)] text-[var(--white)] text-[12px] font-bold px-2.5 py-1 rounded-sm">
-                    9%
-                </span>
-                <img id="main-product-image" src="{% static 'img/book.webp' %}" 
-                     alt="Main Book Cover" 
-                     class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]">
-            </div>
-            
-            <div class="grid grid-cols-4 gap-3">
-                <button onclick="changeImage(this.children[0].src)" class="border-2 border-[var(--pink)] rounded-lg p-2 bg-[var(--bg-card)] h-24 flex items-center justify-center transition-all">
-                    <img src="{% static 'img/book.webp' %}" class="max-h-full object-contain">
-                </button>
-                <button onclick="changeImage(this.children[0].src)" class="border border-gray-200 rounded-lg p-2 bg-[var(--bg-card)] h-24 flex items-center justify-center hover:border-[var(--pink)] transition-all">
-                    <img src="{% static 'img/book.webp' %}" class="max-h-full object-contain opacity-70">
-                </button>
-                <button onclick="changeImage(this.children[0].src)" class="border border-gray-200 rounded-lg p-2 bg-[var(--bg-card)] h-24 flex items-center justify-center hover:border-[var(--pink)] transition-all">
-                    <img src="{% static 'img/book.webp' %}" class="max-h-full object-contain opacity-70">
-                </button>
-              
+    <div class="border border-gray-100 rounded-xl bg-[var(--bg-card)] p-6 flex items-center justify-center h-[420px] md:h-[500px] relative group shadow-sm">
+        {% if product.discount_percentage %}
+        <span class="absolute top-4 left-4 bg-[var(--mint)] text-[var(--white)] text-[12px] font-bold px-2.5 py-1 rounded-sm">
+            {{ product.discount_percentage }}% OFF
+        </span>
+        {% endif %}
+        <img id="main-product-image" src="{{ product.featured_image.url }}" 
+             alt="{{ product.title }}" 
+             class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]">
+    </div>
+    
+    <div class="grid grid-cols-4 gap-3">
+        
+        <button type="button" onclick="changeImage('{{ product.featured_image.url }}', this)" 
+                class="gallery-thumb border-2 border-[var(--pink)] rounded-lg p-2 bg-[var(--bg-card)] h-24 flex items-center justify-center transition-all">
+            <img src="{{ product.featured_image.url }}" class="max-h-full object-contain">
+        </button>
 
-            </div>
-        </div>
+        {% for gallery_item in product.gallery_images.all %}
+        <button type="button" onclick="changeImage('{{ gallery_item.image.url }}', this)" 
+                class="gallery-thumb border border-gray-200 rounded-lg p-2 bg-[var(--bg-card)] h-24 flex items-center justify-center hover:border-[var(--pink)] transition-all">
+            <img src="{{ gallery_item.image.url }}" class="max-h-full object-contain opacity-70">
+        </button>
+        {% endfor %}
+
+    </div>
+</div>
+
+<script>
+    function changeImage(imgSrc, buttonElement) {
+        // Swap out the main image source
+        document.getElementById('main-product-image').src = imgSrc;
+        
+        // Reset all thumbnail border states and lower their opacity
+        document.querySelectorAll('.gallery-thumb').forEach(btn => {
+            btn.classList.remove('border-[var(--pink)]', 'border-2');
+            btn.classList.add('border-gray-200', 'border');
+            btn.querySelector('img').classList.add('opacity-70');
+        });
+        
+        // Light up the clicked thumbnail with the active pink border
+        buttonElement.classList.add('border-[var(--pink)]', 'border-2');
+        buttonElement.classList.remove('border-gray-200', 'border');
+        buttonElement.querySelector('img').classList.remove('opacity-70');
+    }
+</script>
 
         <div class="lg:col-span-7 flex flex-col justify-between">
             <div class="space-y-4">
@@ -48,7 +71,7 @@
                 <h1 class="text-2xl md:text-4xl font-bold tracking-tight text-[var(--text-heading)] leading-tight">
                     The Whispering Forest Premium Hardcover
                 </h1>
-
+                
                 <p class="text-md text-[var(--body-text)] font-medium">
                     By <a href="#" class="text-[var(--pink)] hover:underline">Elena Rostova</a> (Author)
                 </p>
