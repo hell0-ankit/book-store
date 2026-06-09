@@ -209,7 +209,7 @@ gsap.utils.toArray(".gsap-stagger").forEach((wrapper) => {
 
     scrollTrigger: {
       trigger: wrapper,
-      start: "top 85%",
+      start: "top 85%", 
       toggleActions: "play reset play reset",
     },
 
