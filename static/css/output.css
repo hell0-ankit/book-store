@@ -3013,6 +3013,26 @@ body{
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
+.text-\[\#0261af\] {
+  --tw-text-opacity: 1;
+  color: rgb(2 97 175 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#47a6f3\] {
+  --tw-text-opacity: 1;
+  color: rgb(71 166 243 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#0778d4\] {
+  --tw-text-opacity: 1;
+  color: rgb(7 120 212 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#d30d7a\] {
+  --tw-text-opacity: 1;
+  color: rgb(211 13 122 / var(--tw-text-opacity, 1));
+}
+
 .underline {
   text-decoration-line: underline;
 }
