@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="relative mb-5">
-                    <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password"
+                    <input type="password" id="password" name="password" placeholder="secure password" required autocomplete="current-password"
                         class="w-full px-4 py-3.5 border border-gray-300 rounded-md text-sm outline-none text-gray-800 focus:border-[var(--mint)] transition-colors peer placeholder-gray-400">
                     <label for="password" 
                         class="absolute left-3 -top-2 bg-white px-1.5 text-xs text-[var(--mint)] transition-colors  cursor-text">
@@ -69,17 +69,12 @@
             Don't have an account? <a href="#" class="text-blue-500 font-semibold hover:underline">Sign up</a>
         </div>
     </section>
-
-    <section class="hidden md:block flex-[1.2] relative bg-gradient-to-br from-cyan-200 via-purple-400 to-indigo-500 animate-fluid
-        before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.4)_0%,transparent_50%)]
-        after:content-[''] after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.3)_0%,transparent_60%)]">
-        
-        <div class="absolute bottom-10 right-10 flex gap-1.5 items-center">
-            <span class="w-4 h-1.5 rounded-full bg-white"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
-        </div>
-    </section>
+<section class="hidden md:block flex-[1.2] relative min-h-screen overflow-hidden">
+    <img
+        src="{% static 'img/accountpage.jpg' %}"
+        alt="Login Background"
+        class="w-full h-full object-cover">
+</section>
 </div>
 
 <script>
