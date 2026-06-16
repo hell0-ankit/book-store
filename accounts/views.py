@@ -17,4 +17,4 @@ def resend_otp(request):
     return redirect("verify_otp")
 
 def reset_password(request):
-    return render(request, 'accounts/verify-otp.html')
+    return render(request, 'accounts/reset-password.html')
