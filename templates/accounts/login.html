@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="flex justify-end -mt-3 mb-6">
-                    <a href="#" class="text-xs text-gray-400 hover:text-[var(--pink)] transition-colors">Forgot password?</a>
+                    <a href="{% url 'forgetpassward'  %}" class="text-xs text-gray-400 hover:text-[var(--pink)] transition-colors">Forgot password?</a>
                 </div>
 
                 <button type="submit" class="w-full py-3.5 btn btn-primary hover:bg-transparent bg-[var(--pink)] hover:text-[var(--pink)] text-white">
@@ -66,7 +66,7 @@
         </div>
 
         <div class="text-sm text-gray-400">
-            Don't have an account? <a href="#" class="text-blue-500 font-semibold hover:underline">Sign up</a>
+            Don't have an account? <a href="{% url 'signup'  %}" class="text-blue-500 font-semibold hover:underline">Sign up</a>
         </div>
     </section>
 <section class="hidden md:block flex-[1.2] relative min-h-screen overflow-hidden">
