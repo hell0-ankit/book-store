@@ -2826,6 +2826,10 @@ body{
   letter-spacing: 0.2em;
 }
 
+.tracking-\[10px\] {
+  letter-spacing: 10px;
+}
+
 .tracking-tight {
   letter-spacing: -0.025em;
 }
