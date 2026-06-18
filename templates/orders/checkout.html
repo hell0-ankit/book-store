@@ -11,7 +11,7 @@
         </div>
         <div class="text-xs text-[var(--body-text)] opacity-80">
             <a href="{% url 'home' %}" class="hover:text-[var(--pink)] transition-colors">Home</a> / 
-            <a href="{% url 'cart' %}" class="hover:text-[var(--pink)] transition-colors">Cart</a> / 
+            <a href="{% url 'cart:cart_detail' %}" class="hover:text-[var(--pink)] transition-colors">Cart</a> / 
             <span class="text-[var(--text-heading)] font-semibold">Checkout</span>
         </div>
     </div>
@@ -145,7 +145,7 @@
             </div>
             
             <div class="text-center">
-                <a href="{% url 'cart' %}" class="text-xs font-semibold text-[var(--body-text)] opacity-70 hover:opacity-100 hover:text-[var(--pink)] transition-all">
+                <a href="{% url 'cart:cart_detail' %}" class="text-xs font-semibold text-[var(--body-text)] opacity-70 hover:opacity-100 hover:text-[var(--pink)] transition-all">
                     <i class="fa-solid fa-arrow-left text-[10px] mr-1"></i> Return back to shopping cart modification
                 </a>
             </div>
