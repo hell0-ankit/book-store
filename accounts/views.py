@@ -69,6 +69,20 @@ def forgot_password(request):
             messages.error(request,"Email not found.")
     return render( request,"accounts/forgot_password.html")
 
+def reset_password(request, token):
+    reset = get_object_or_404( PasswordReset,token=token)
+    user = reset.user
+    if request.method=="POST":
+        password = request.POST.get("password")
+        confirm = request.POST.get( "confirm_password")
+        if password == confirm:
+            user.password = make_password(password)
+            user.save()
+            reset.delete()
+            return redirect("login")
+        else:
+            messages.error(request,"Password not match")
+    return render(request,"accounts/reset_password.html")
 
 
 
