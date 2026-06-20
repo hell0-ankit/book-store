@@ -1,13 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model,login,authenticate,logout
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
+
+from .models import PasswordReset
 
 User = get_user_model()
-
-
-# Create your views here.
-def loginViews(request):
-    return render(request, 'accounts/login.html')
 
 def signupViews(request):
     if request.method =="POST":
@@ -23,7 +23,7 @@ def signupViews(request):
         if User.objects.filter(username=email).exists():
             messages.error(request, "Email already exists.")
             return redirect("signup")
-          # Create User
+        # Create User
         user = User.objects.create_user(
             username=email,
             email=email,
@@ -34,15 +34,45 @@ def signupViews(request):
         return redirect("login")
     return render(request, 'accounts/signup.html')
 
+def loginViews(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+        if user is not None:
+            login(request, user)
+            return redirect('userprofile')
+        else:
+            messages.error(request, "Invalid email or password")
+    return render(request, 'accounts/login.html')
+
+def logoutView(request):
+    logout(request)
+    return redirect('home')
+
+
+def forgot_password(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        user = User.objects.filter(email=email).first()
+        if user:
+            reset = PasswordReset.objects.create(user=user)
+            link = (f"http://127.0.0.1:8000/accounts/reset-password/{reset.token}/")
+            send_mail("Reset Password",link,"ankitbohra660@gmail.com",[email])
+            messages.success( request,"Password reset link email par send kar diya gaya hai.")
+        else:
+            messages.error(request,"Email not found.")
+    return render( request,"accounts/forgot_password.html")
 
 
 
 
 
-
-
-def forgetViews(request):
-    return render(request, 'accounts/forget-password.html')
 
 def verifyOTPViews(request):
     return render(request, 'accounts/verify-otp.html')
@@ -50,5 +80,3 @@ def verifyOTPViews(request):
 def resend_otp(request):
     return redirect("verify_otp")
 
-def reset_password(request):
-    return render(request, 'accounts/reset-password.html')
