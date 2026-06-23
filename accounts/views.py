@@ -46,7 +46,7 @@ def loginViews(request):
         )
         if user is not None:
             login(request, user)
-            return redirect('userprofile')
+            return redirect('customer_dashboard')
         else:
             messages.error(request, "Invalid email or password")
     return render(request, 'accounts/login.html')
@@ -83,8 +83,6 @@ def reset_password(request, token):
         else:
             messages.error(request,"Password not match")
     return render(request,"accounts/reset_password.html")
-
-
 
 
 
