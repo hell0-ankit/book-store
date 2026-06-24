@@ -1,0 +1,52 @@
+{% if messages %}
+<div id="alerts" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-[420px] max-w-[95vw]">
+  {% for message in messages %}
+  <div class="banner flex items-center gap-3 px-4 py-3 rounded-lg border-l-4
+    {% if message.tags == 'success' %} bg-[#EAF3DE]/80 border-l-[#639922] border-t border-r border-b border-[#C0DD97]
+    {% elif message.tags == 'error' %} bg-[#FCEBEB]/80 border-l-[#E24B4A] border-t border-r border-b border-[#F7C1C1]
+    {% elif message.tags == 'warning' %} bg-[#FAEEDA]/80 border-l-[#BA7517] border-t border-r border-b border-[#FAC775]
+    {% else %} bg-[#E6F1FB]/80 border-l-[#378ADD] border-t border-r border-b border-[#B5D4F4] {% endif %}
+    opacity-0 -translate-y-2 transition-all duration-300 backdrop-blur-sm">
+
+    <i class="text-sm flex-shrink-0
+      {% if message.tags == 'success' %} fa-solid fa-circle-check text-[#3B6D11]
+      {% elif message.tags == 'error' %} fa-solid fa-circle-xmark text-[#A32D2D]
+      {% elif message.tags == 'warning' %} fa-solid fa-triangle-exclamation text-[#854F0B]
+      {% else %} fa-solid fa-circle-info text-[#185FA5] {% endif %}"></i>
+
+    <div class="flex-1 flex items-center gap-2 min-w-0">
+      <p class="text-xs font-semibold capitalize flex-shrink-0
+        {% if message.tags == 'success' %} text-[#27500A]
+        {% elif message.tags == 'error' %} text-[#791F1F]
+        {% elif message.tags == 'warning' %} text-[#633806]
+        {% else %} text-[#0C447C] {% endif %}">{{ message.tags }}</p>
+      <span class="text-[10px] opacity-60
+        {% if message.tags == 'success' %} text-[#27500A]
+        {% elif message.tags == 'error' %} text-[#791F1F]
+        {% elif message.tags == 'warning' %} text-[#633806]
+        {% else %} text-[#0C447C] {% endif %}">•</span>
+      <p class="text-xs truncate
+        {% if message.tags == 'success' %} text-[#3B6D11]
+        {% elif message.tags == 'error' %} text-[#A32D2D]
+        {% elif message.tags == 'warning' %} text-[#854F0B]
+        {% else %} text-[#185FA5] {% endif %}">{{ message }}</p>
+    </div>
+
+    <button onclick="this.closest('.banner').remove()" class="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded text-gray-400 hover:bg-black/10 hover:text-gray-600 transition-colors">
+      <i class="fa-solid fa-xmark text-[10px]"></i>
+    </button>
+  </div>
+  {% endfor %}
+</div>
+
+<script>
+  document.querySelectorAll('.banner').forEach((b, i) => {
+    setTimeout(() => { b.classList.replace('opacity-0','opacity-100'); b.classList.replace('-translate-y-2','translate-y-0'); }, i * 100);
+    setTimeout(() => {
+      b.classList.replace('opacity-100','opacity-0');
+      b.classList.replace('translate-y-0','-translate-y-2');
+      setTimeout(() => b.remove(), 300);
+    }, 4500 + i * 100);
+  });
+</script>
+{% endif %}

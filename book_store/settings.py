@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'accounts',
     'cart',
     'orders',
+    'customer_dashboard'
 ]
 
 MIDDLEWARE = [
@@ -76,6 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'book_store.wsgi.application'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
