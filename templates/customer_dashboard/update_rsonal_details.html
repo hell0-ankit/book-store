@@ -90,10 +90,35 @@
                                class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 text-sm rounded-xl text-gray-900 placeholder-gray-400 focus:ring-1 focus:ring-[var(--pink)] focus:border-[var(--pink)] focus:outline-none font-medium transition-all shadow-sm">
                     </div>
                 </div>
+                <div class="space-y-1.5">
+                    <label class="font-bold text-gray-700 uppercase tracking-wider text-[10px] block pl-0.5">
+                        Gender
+                    </label>
+
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                            <i class="fas fa-user text-sm"></i>
+                        </div>
+
+                        <select name="gender"
+                            class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 text-sm rounded-xl text-gray-900 focus:ring-1 focus:ring-[var(--pink)] focus:border-[var(--pink)] focus:outline-none font-medium transition-all shadow-sm">
+
+                            <option value="">Select Gender</option>
+
+                            {% for value, label in form.gender.field.choices %}
+                                <option value="{{ value }}"
+                                    {% if form.gender.value == value %}selected{% endif %}>
+                                    {{ label }}
+                                </option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div class="space-y-1.5">
-                <label class="font-bold text-gray-700 uppercase tracking-wider text-[10px] block pl-0.5">Default Shipping Address</label>
+                <label class="font-bold text-gray-700 uppercase tracking-wider text-[10px] block pl-0.5">Address</label>
                 <div class="relative">
                     <div class="absolute top-3.5 left-3.5 flex items-center pointer-events-none text-gray-400">
                         <i class="fas fa-map-marker-alt text-sm"></i>
