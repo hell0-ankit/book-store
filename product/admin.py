@@ -21,6 +21,6 @@ class Books(admin.ModelAdmin):
 
 @admin.register(BookImages)
 class Books_gallery(admin.ModelAdmin):
-    fields = ("book","image","alt_text")
+    fields = ("book","image", "alt_text")
    
    

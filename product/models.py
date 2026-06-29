@@ -76,7 +76,7 @@ class BookImages(models.Model):
     book = models.ForeignKey(Book,on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='book_gallery/')
     alt_text = models.CharField(max_length=200, blank=True, help_text="Text for SEO and screen readers ")
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True )
     def __str__(self):
         return f"Image for {self.book.title}"
    
