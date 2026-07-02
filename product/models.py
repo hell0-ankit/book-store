@@ -82,6 +82,7 @@ class Book(models.Model):
     categories = models.ManyToManyField(Category, related_name='books')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount_price = models.DecimalField(max_digits=10, decimal_places=2)
+    discount_percentage = models.PositiveIntegerField(default=0) 
     stock= models.CharField(max_length=50, choices=Stock.choices, default=Stock.IN_STOCK)  # will add business logic so now manually select stock 
     cover_image= models.ImageField(upload_to='books_cover_image/')
     isbn = models.CharField(max_length=13, unique=True, blank=True)

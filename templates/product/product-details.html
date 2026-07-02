@@ -9,7 +9,7 @@
         <span class="mx-2">/</span>
         <a href="#" class="hover:text-[var(--pink)] transition-colors">Books</a>
         <span class="mx-2">/</span>
-        <span class="text-[var(--text-heading)] font-semibold">Book Title Name</span>
+        <span class="text-[var(--pink)] font-semibold">{{book_detail.title}}</span>
     </nav>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-14">
@@ -65,48 +65,42 @@
         <div class="lg:col-span-7 flex flex-col justify-between">
             <div class="space-y-4">
                 <div class="flex flex-wrap items-center gap-3">
-                    <span class="text-xs uppercase font-bold tracking-widest text-[var(--pink)] bg-pink-50 px-2.5 py-1 rounded">ISBN: LIT-774921</span>
+                    <span class="text-xs uppercase font-bold tracking-widest text-[var(--pink)] bg-pink-50 px-2.5 py-1 rounded">ISBN:{{book_detail.isbn}}</span>
                 </div>
 
-                <h1 class="text-2xl md:text-4xl font-bold tracking-tight text-[var(--text-heading)] leading-tight">
-                    The Whispering Forest Premium Hardcover
-                </h1>
+                <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-[var(--text-heading)] leading-tight">
+                    {{book_detail.title}}
+                </h2>
                 
                 <p class="text-md text-[var(--body-text)] font-medium">
-                    By <a href="#" class="text-[var(--pink)] hover:underline">Elena Rostova</a> (Author)
+                    By <a href="#" class="text-[var(--pink)] hover:underline">{{book_detail.authors}}</a> (Author)
                 </p>
 
-                {% comment %} <div class="flex items-center gap-3 pt-1">
-                    <div class="flex text-amber-400 text-sm">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                    </div>
-                    <span class="text-xs text-gray-400 font-medium">(4.8 Stars / 124 Reviews)</span>
-                </div> {% endcomment %}
 
                 <hr class="border-gray-100 my-4">
 
                 <div class="flex items-baseline gap-3">
-                    <span class="text-3xl font-extrabold text-[var(--mint)]">₹ 20.00</span>
-                    <span class="text-md line-through text-[var(--body-text)] font-medium">₹ 22.00</span>
-                    <span class="text-xs bg-green-50 text-[var(--mint)] px-2 py-0.5 rounded font-bold">Save ₹ 2.00</span>
+                    <span class="text-3xl font-extrabold text-[var(--mint)]">₹  {{book_detail.price}}</span>
+                    <span class="text-md line-through text-[var(--body-text)] font-medium">{{book_detail.discount_price}}</span>
+                    <span class="text-xs bg-green-50 text-[var(--mint)] px-2 py-0.5 rounded font-bold">{{book_detail.discount_percentage}} % Save</span>
                 </div>
 
                 <p class="text-[15px] leading-relaxed text-[var(--body-text)] pt-2 max-w-2xl">
-                    An immersive journey deep into unmapped wilderness ecosystems. Rostova weaves together structural narrative elements with dark historical fiction, making this limited hardcover release a definitive modern masterpiece for collectors.
+                   {{book_detail.description}}
                 </p>
 
                 <div class="grid grid-cols-2 gap-4 max-w-sm pt-4 text-xs">
                     <div class="bg-gray-50 p-3 rounded-lg flex flex-col">
                         <span class="text-[var(--mint)] uppercase tracking-wider font-semibold">Total Pages</span>
-                        <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">123 Pages</span>
+                        <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">{{book_detail.page_count}}</span>
                     </div>
                     <div class="bg-gray-50 p-3 rounded-lg flex flex-col">
                         <span class="text-[var(--mint)] uppercase tracking-wider font-semibold">Language</span>
-                        <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">English</span>
+                        <span class="text-[var(--text-heading)] font-bold capitalize text-[13px] mt-0.5">{{book_detail.language}}</span>
                     </div>
                     <div class="bg-gray-50 p-3 rounded-lg flex flex-col">
-                        <span class="text-[var(--mint)] uppercase tracking-wider font-semibold">Genre</span>
-                        <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">Biography</span>
+                        <span class="text-[var(--mint)] uppercase tracking-wider font-semibold">Category</span>
+                        <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">{{book_detail.categories}}</span>
                     </div>
                 </div>
             </div>
@@ -149,26 +143,21 @@
         </div>
 
         <div id="tab-desc" class="tab-content text-[15px] leading-relaxed text-[var(--body-text)] space-y-4 max-w-4xl">
-            <p>Step inside a dense narrative fabric where reality blurs with environmental fantasy. The Whispering Forest outlines structural challenges within old growth preservation systems via an engaging fictional diary structure. Ideal layout pacing keeps reading speeds immersive from start to finish.</p>
-            <p>This premium hardcover version features custom serif drop-caps layout configurations alongside exclusive matte color separation filters mapping out full illustration pages inside.</p>
+            <p>{{book_detail.description}}</p>
         </div>
 
         <div id="tab-spec" class="tab-content text-[15px] space-y-2 hidden max-w-2xl">
             <div class="grid grid-cols-3 py-2 border-b border-gray-50">
                 <span class="font-medium text-[var(--mint)]">Publisher</span>
-                <span class="col-span-2 font-semibold text-[var(--text-heading)]">Literati Press Ltd.</span>
+                <span class="col-span-2 font-semibold text-[var(--text-heading)]">{{book_detail.publisher}}</span>
             </div>
             <div class="grid grid-cols-3 py-2 border-b border-gray-50">
                 <span class="font-medium text-[var(--mint)]">Publication Date</span>
-                <span class="col-span-2 font-semibold text-[var(--text-heading)]">May 2026</span>
+                <span class="col-span-2 font-semibold text-[var(--text-heading)]">{{book_detail.publisher}}</span>
             </div>
             <div class="grid grid-cols-3 py-2 border-b border-gray-50">
                 <span class="font-medium text-[var(--mint)]">Total Pages</span>
-                <span class="col-span-2 font-semibold text-[var(--text-heading)]">412 Pages</span>
-            </div>
-            <div class="grid grid-cols-3 py-2 border-b border-gray-50">
-                <span class="font-medium text-[var(--mint)]">Dimensions</span>
-                <span class="col-span-2 font-semibold text-[var(--text-heading)]">6.0 x 1.2 x 9.0 inches</span>
+                <span class="col-span-2 font-semibold text-[var(--text-heading)]">{{book_detail.page_count}}</span>
             </div>
         </div>
     </div>

@@ -3,10 +3,16 @@ from product.models import Book
 
 def productListing(request):
     products = Book.objects.all()
-    return render(request, 'product/product-listing.html', {'books': products})
+    context = {
+    "books": products,
+    }
+    return render(request, 'product/product-listing.html', context)
 
 def productDetail(request, slug):
     product_details = get_object_or_404(Book,slug=slug)
-    return render(request, 'product/product-details.html', {'book_details': product_details})
+    context = {
+        "book_detail": product_details,
+    }
+    return render(request, 'product/product-details.html', context)
 
 
