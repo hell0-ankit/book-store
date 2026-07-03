@@ -3,8 +3,9 @@ from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 
 class Language(models.TextChoices):
-    HINDI = "hindi", "Hindi"
-    ENGLISH = "english", "English"
+    HINDI = "HI", "Hindi"
+    ENGLISH = "EN", "English"
+    URDU = "UR", "Urdu"
 
 class Stock(models.TextChoices):
     IN_STOCK = "in_stock", "In Stock"
