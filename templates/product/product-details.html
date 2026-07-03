@@ -13,83 +13,39 @@
     </nav>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-14">
-        
         <div class="lg:col-span-5 flex flex-col gap-4">
-    <div class="border border-gray-100 rounded-xl bg-[var(--bg-card)] p-6 flex items-center justify-center h-[420px] md:h-[500px] relative group shadow-sm">
-        {% if product.discount_percentage %}
-        <span class="absolute top-4 left-4 bg-[var(--mint)] text-[var(--white)] text-[12px] font-bold px-2.5 py-1 rounded-sm">
-            {{ product.discount_percentage }}% OFF
-        </span>
-        {% endif %}
-        <img id="main-product-image" src="{{ product.featured_image.url }}" 
-             alt="{{ product.title }}" 
-             class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]">
-    </div>
-    
-    <div class="grid grid-cols-4 gap-3">
-        
-        <button type="button" onclick="changeImage('{{ product.featured_image.url }}', this)" 
-                class="gallery-thumb border-2 border-[var(--pink)] rounded-lg p-2 bg-[var(--bg-card)] h-24 flex items-center justify-center transition-all">
-            <img src="{{ product.featured_image.url }}" class="max-h-full object-contain">
-        </button>
+            <div class="border border-gray-100 rounded-xl bg-[var(--bg-card)] p-6 flex items-center justify-center h-[420px] md:h-[500px] relative group shadow-sm">
+                {% if book_detail.discount_percentage %}
+                <span class="absolute top-4 left-4 bg-[var(--mint)] text-[var(--white)] text-[12px] font-bold px-2.5 py-1 rounded-sm">
+                    {{ book_detail.discount_percentage }}% OFF
+                </span>
+                {% endif %}
 
-        {% for gallery_item in product.gallery_images.all %}
-        <button type="button" onclick="changeImage('{{ gallery_item.image.url }}', this)" 
-                class="gallery-thumb border border-gray-200 rounded-lg p-2 bg-[var(--bg-card)] h-24 flex items-center justify-center hover:border-[var(--pink)] transition-all">
-            <img src="{{ gallery_item.image.url }}" class="max-h-full object-contain opacity-70">
-        </button>
-        {% endfor %}
-
-    </div>
-</div>
-
-<script>
-    function changeImage(imgSrc, buttonElement) {
-        // Swap out the main image source
-        document.getElementById('main-product-image').src = imgSrc;
-        
-        // Reset all thumbnail border states and lower their opacity
-        document.querySelectorAll('.gallery-thumb').forEach(btn => {
-            btn.classList.remove('border-[var(--pink)]', 'border-2');
-            btn.classList.add('border-gray-200', 'border');
-            btn.querySelector('img').classList.add('opacity-70');
-        });
-        
-        // Light up the clicked thumbnail with the active pink border
-        buttonElement.classList.add('border-[var(--pink)]', 'border-2');
-        buttonElement.classList.remove('border-gray-200', 'border');
-        buttonElement.querySelector('img').classList.remove('opacity-70');
-    }
-</script>
+                <img id="main-product-image" src="{{ book_detail.cover_image.url }}" 
+                    alt="{{ book_detail.title }}" 
+                    class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]">
+            </div>
+        </div>
 
         <div class="lg:col-span-7 flex flex-col justify-between">
             <div class="space-y-4">
                 <div class="flex flex-wrap items-center gap-3">
                     <span class="text-xs uppercase font-bold tracking-widest text-[var(--pink)] bg-pink-50 px-2.5 py-1 rounded">ISBN:{{book_detail.isbn}}</span>
                 </div>
-
                 <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-[var(--text-heading)] leading-tight">
                     {{book_detail.title}}
                 </h2>
-                
-                <p class="text-md text-[var(--body-text)] font-medium">
-                    By <a href="#" class="text-[var(--pink)] hover:underline">{{book_detail.authors}}</a> (Author)
-                </p>
-
-
+                <p class="text-md text-[var(--body-text)] font-medium"> By <a href="#" class="text-[var(--pink)] hover:underline">{{book_detail.authors.first.name}}</a> (Author)</p>
                 <hr class="border-gray-100 my-4">
-
                 <div class="flex items-baseline gap-3">
                     <span class="text-3xl font-extrabold text-[var(--mint)]">₹  {{book_detail.price}}</span>
                     <span class="text-md line-through text-[var(--body-text)] font-medium">{{book_detail.discount_price}}</span>
                     <span class="text-xs bg-green-50 text-[var(--mint)] px-2 py-0.5 rounded font-bold">{{book_detail.discount_percentage}} % Save</span>
                 </div>
-
                 <p class="text-[15px] leading-relaxed text-[var(--body-text)] pt-2 max-w-2xl">
-                   {{book_detail.description}}
+                   {{book_detail.description  | truncatewords:40 }}
                 </p>
-
-                <div class="grid grid-cols-2 gap-4 max-w-sm pt-4 text-xs">
+                <div class="grid grid-cols-3 gap-4 max-w-sm pt-4 text-xs">
                     <div class="bg-gray-50 p-3 rounded-lg flex flex-col">
                         <span class="text-[var(--mint)] uppercase tracking-wider font-semibold">Total Pages</span>
                         <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">{{book_detail.page_count}}</span>
@@ -100,7 +56,7 @@
                     </div>
                     <div class="bg-gray-50 p-3 rounded-lg flex flex-col">
                         <span class="text-[var(--mint)] uppercase tracking-wider font-semibold">Category</span>
-                        <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5">{{book_detail.categories}}</span>
+                        <span class="text-[var(--text-heading)] font-bold text-[13px] mt-0.5"> {{ book_detail.categories.first.name }}</span>
                     </div>
                 </div>
             </div>
@@ -149,11 +105,11 @@
         <div id="tab-spec" class="tab-content text-[15px] space-y-2 hidden max-w-2xl">
             <div class="grid grid-cols-3 py-2 border-b border-gray-50">
                 <span class="font-medium text-[var(--mint)]">Publisher</span>
-                <span class="col-span-2 font-semibold text-[var(--text-heading)]">{{book_detail.publisher}}</span>
+                <span class="col-span-2 font-semibold text-[var(--text-heading)]">{{book_detail.publisher.name}}</span>
             </div>
             <div class="grid grid-cols-3 py-2 border-b border-gray-50">
                 <span class="font-medium text-[var(--mint)]">Publication Date</span>
-                <span class="col-span-2 font-semibold text-[var(--text-heading)]">{{book_detail.publisher}}</span>
+                <span class="col-span-2 font-semibold text-[var(--text-heading)]">{{book_detail.publication_date}}</span>
             </div>
             <div class="grid grid-cols-3 py-2 border-b border-gray-50">
                 <span class="font-medium text-[var(--mint)]">Total Pages</span>
