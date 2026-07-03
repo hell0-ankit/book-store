@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models 
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 
@@ -27,6 +27,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
     class Meta:
         db_table = "book_categories"
         verbose_name_plural = "Categories"
@@ -89,6 +90,7 @@ class Book(models.Model):
     page_count = models.PositiveIntegerField()
     language = models.CharField(max_length=50, choices=Language.choices, default=Language.HINDI)
     description = models.TextField()
+    publication_date = models.DateField(auto_now_add=False)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

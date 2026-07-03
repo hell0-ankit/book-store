@@ -15,4 +15,5 @@ def productDetail(request, slug):
     }
     return render(request, 'product/product-details.html', context)
 
+# def category(request):
 

@@ -16,7 +16,7 @@ class BooksPublisher(admin.ModelAdmin):
 
 @admin.register(Book)
 class Books(admin.ModelAdmin):
-    fields = ("title", "authors","publisher","categories","price","discount_price","discount_percentage","cover_image","isbn","page_count","language","description","is_active")
+    fields = ("title", "authors","publisher","categories","price","discount_price","discount_percentage","cover_image","isbn","stock","page_count","publication_date","language","description","is_active")
     
 @admin.register(BookImages)
 class Books_gallery(admin.ModelAdmin):
