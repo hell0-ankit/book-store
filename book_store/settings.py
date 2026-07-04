@@ -74,6 +74,7 @@ TEMPLATES = [
                 'product.context_processors.book_categories',
                 'product.context_processors.book_author', 
                 'product.context_processors.book_publisher', 
+                'cart.context_processors.cart_items', 
             ],
         },
     },
