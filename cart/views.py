@@ -7,31 +7,21 @@ from cart.models import Cart, CartItem
 from django.shortcuts import get_object_or_404, redirect
 
 def add_to_cart(request, book_id):
-    # Get the selected book
     book = get_object_or_404(Book, id=book_id)
 
-    # Get or create the user's cart
-    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart, _ = Cart.objects.get_or_create(user=request.user)
 
-    # Check if the book already exists in the cart
-    cart_item, item_created = CartItem.objects.get_or_create(
-        cart=cart,
-        book=book,
-    )
-
-    # If book already exists, increase quantity
     quantity = int(request.POST.get("quantity", 1))
-    cart_item, item_created = CartItem.objects.get_or_create(
+
+    cart_item, created = CartItem.objects.get_or_create(
         cart=cart,
         book=book,
+        defaults={"quantity": quantity}
     )
 
-    if item_created:
-        cart_item.quantity = quantity
-    else:
+    if not created:
         cart_item.quantity += quantity
-
-    cart_item.save()
+        cart_item.save()
 
     return redirect("cart:cart")
 
