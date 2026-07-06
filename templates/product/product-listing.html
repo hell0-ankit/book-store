@@ -32,9 +32,10 @@
                         <span class="text-xs line-through text-gray-300 font-medium">{{book.price}}</span>
                         <span class="text-sm text-[var(--mint)]">{{book.discount_price}}</span>
                     </div>
-                    <button class="w-full btn btn-primary text-xs font-bold uppercase tracking-wider py-2.5 rounded transition-colors mt-auto">
+
+                    <a href="{% url 'cart:add_to_cart' book.id %}" class="w-full btn btn-primary text-xs font-bold uppercase tracking-wider py-2.5 rounded transition-colors mt-auto">
                     Add To Cart
-                    </button>
+                    </a>
                 </div>
             </div>
 
