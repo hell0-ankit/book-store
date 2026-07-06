@@ -9,7 +9,14 @@ def cart_items(request):
     }
 
 def cart(request):
-    total=Cart.objects.first()
-    return{
-        "total":total
+    if request.user.is_authenticated:
+        cart, _ = Cart.objects.get_or_create(user=request.user)
+        return {
+            "cart_total": cart.total,
+            "cart": cart,
         }
+
+    return {
+        "cart_total": 0,
+        "cart": None,
+    }

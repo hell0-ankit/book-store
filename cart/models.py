@@ -2,14 +2,14 @@ from django.db import models
 from django.conf import settings
 from product.models import Book
 
-
 class Cart(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="cart" )
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     @property
-    def sub_total(self):
-        return sum(item.subtotal for item in self.cartitem_set.all())
+    def total(self):
+        return sum(item.subtotal for item in self.items.all())
 
     def __str__(self):
         return f"{self.user}'s Cart"
@@ -23,7 +23,7 @@ class CartItem(models.Model):
         unique_together = ("cart", "book")
 
     @property
-    def sub_total_item(self):
+    def subtotal(self):
         return self.quantity * self.book.discount_price
     
 

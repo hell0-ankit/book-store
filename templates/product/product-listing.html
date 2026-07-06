@@ -10,6 +10,7 @@
                 <div class="flex justify-between items-start w-full h-8 mb-2">
                     <span class="bg-[var(--mint)] text-[var(--white)] text-[11px] font-bold px-2 py-0.5 rounded-sm">{{ book.discount_percentage }}% OFF
                     </span>
+                    <!--
                     <div class="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-4 top-4 z-20">
                         <a href="#" class="w-8 h-8 border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">
                         <i class="fa-regular fa-heart text-sm"></i>
@@ -17,7 +18,9 @@
                         <a href="#" class="w-8 h-8 border border-[var(--mint)] rounded-full flex items-center justify-center text-[var(--mint)] shadow-sm transition-all duration-300 hover:bg-[var(--pink)] hover:text-white hover:border-[var(--pink)]">
                         <i class="fa-solid fa-eye text-sm"></i>
                         </a>
-                    </div>
+                    </div> 
+                    -->
+
                 </div>
                 <div class="w-full h-48 flex items-center justify-center relative mb-4">
                     <img src="{{ book.cover_image.url }}" 
@@ -33,7 +36,7 @@
                         <span class="text-sm text-[var(--mint)]">{{book.discount_price}}</span>
                     </div>
 
-                    <a href="{% url 'cart:add_to_cart' book.id %}" class="w-full btn btn-primary text-xs font-bold uppercase tracking-wider py-2.5 rounded transition-colors mt-auto">
+                    <a href="{% url 'cart:add_to_cart' book.id %}" class="w-full btn btn-primary text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded transition-colors mt-auto">
                     Add To Cart
                     </a>
                 </div>
@@ -41,7 +44,6 @@
 
             {% endfor %}
             
-
 
 
         </div>
