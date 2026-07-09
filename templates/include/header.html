@@ -45,11 +45,23 @@
                 </form>
                 <!-- Desktop E-commerce Action Icons -->
                 <div class="flex items-center gap-3 text-[18px] text-[#1a1a1a]">
-                    <a href="#" class="action-icon" title="Account"><i class="fa-regular fa-user"></i></a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'customer_dashboard'  %}" class="action-icon" title="Account"><i class="fa-regular fa-user"></i></a>
+                    {% else %}
+                    <a href="{% url 'login'  %}" class="action-icon" title="Account"><i class="fa-regular fa-user"></i></a>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'cart:cart' %}" class="action-icon relative" title="Cart">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span class="badge absolute -top-[4px] -right-[4px] bg-[var(--pink)] text-white text-[10px] font-bold aspect-square w-4 flex items-center justify-center rounded-full">{{total_quantity}}</span>
+                    </a>
+                    {% else %}
                     <a href="#" class="action-icon relative" title="Cart">
                         <i class="fa-solid fa-bag-shopping"></i>
-                        <span class="badge absolute -top-[4px] -right-[4px] bg-[var(--pink)] text-white text-[10px] font-bold aspect-square w-4 flex items-center justify-center rounded-full">3</span>
+                        <span class="badge absolute -top-[4px] -right-[4px] bg-[var(--pink)] text-white text-[10px] font-bold aspect-square w-4 flex items-center justify-center rounded-full">0</span>
                     </a>
+                    {% endif %}
+                    
                 </div>
             </div>
             <!-- MOBILE-ONLY BUTTON: Hamburger Menu (Visible only below 'xl' screen) -->
