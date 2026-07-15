@@ -12,7 +12,7 @@ class BooksAuthor(admin.ModelAdmin):
 
 @admin.register(Publisher)
 class BooksPublisher(admin.ModelAdmin):
-    fields = ("name", "publication_date")
+    fields = ("name", "publication_date", "slug")
 
 @admin.register(Book)
 class Books(admin.ModelAdmin):

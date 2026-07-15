@@ -1,18 +1,8 @@
 from product.models import Category, Author, Publisher
 
-def book_categories(request):
-    categories= Category.objects.all()
+def book_filters(request):
     return {
-        "book_category": categories
-    }
-
-def book_author(request):
-    author =Author.objects.all()
-    return{
-        "book_authors" : author
-    }
-def book_publisher(request):
-    publisher = Publisher.objects.all()
-    return{
-        "book_publisher": publisher
+        "book_categories": Category.objects.all(),
+        "book_authors": Author.objects.all(),
+        "book_publishers": Publisher.objects.all(),
     }

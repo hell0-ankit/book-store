@@ -3,8 +3,8 @@
         Shop By Categories
     </h3>
     <ul class="gsap-stagger space-y-2 text-[15px] max-h-[240px] overflow-y-auto pr-1 custom-scrollbar">
-        {% for category in book_category %}
-        <li><a href="#" class="gsap-item text-[var(--body-text)] hover:text-[var(--pink)] transition-colors block py-0.5">{{category.name}}</a></li>
+        {% for category in book_categories %}
+        <li><a href="{% url 'product-listing' %}?category={{ category.slug }}" class="gsap-item text-[var(--body-text)] hover:text-[var(--pink)] transition-colors block py-0.5">{{category.name}}</a></li>
         {% endfor %}
 
     </ul>
@@ -13,26 +13,30 @@
     <h3 class="text-[var(--text-heading)] text-[20px] font-bold border-b pb-2 mb-3 flex justify-between items-center"> Shop By Authors</h3>
     <ul class="gsap-stagger space-y-2 text-[15px] max-h-[240px] overflow-y-auto pr-1 custom-scrollbar">
         {% for author in book_authors %}
-        <li><a href="#" class="gsap-item text-[var(--body-text)] hover:text-[var(--pink)] transition-colors block py-0.5">{{author.name}}</a></li>
+        <li><a href="{% url 'product-listing' %}?author={{ author.slug }}" class="gsap-item text-[var(--body-text)] hover:text-[var(--pink)] transition-colors block py-0.5">{{author.name}}</a></li>
          {% endfor %}
-       
     </ul>
 </div>
 
 <div class="bg-[var(--white)] p-5 border border-gray-200 rounded-md">
     <h3 class="text-[var(--text-heading)] text-[20px] font-bold border-b pb-2 mb-3 flex justify-between items-center"> Shop By Publisher</h3>
     <ul class="gsap-stagger space-y-2 text-[15px] max-h-[240px] overflow-y-auto pr-1 custom-scrollbar">
-        {% for publisher in book_publisher %}
-        <li><a href="#" class="gsap-item text-[var(--body-text)] hover:text-[var(--pink)] transition-colors block py-0.5">{{publisher.name}}</a></li>
+        {% for publisher in book_publishers %}
+        <li><a href="{% url 'product-listing' %}?publisher={{ publisher.slug }}" class="gsap-item text-[var(--body-text)] hover:text-[var(--pink)] transition-colors block py-0.5">{{publisher.name}}</a></li>
          {% endfor %}
        
     </ul>
+
+
 </div>
 <div class="bg-[var(--white)] p-5 border border-gray-200 rounded-md">
     <h3 class="text-[var(--text-heading)] text-[20px] font-bold border-b pb-2 mb-3 flex justify-between items-center">  Filter By Language</h3>
     <div class="gsap-stagger flex flex-wrap gap-2 text-xs">
-        <a href="#" class="gsap-item border border-gray-300 px-3 py-1.5 rounded hover:border-[var(--pink)] hover:text-[var(--pink)] transition-colors">Hindi</a>
-        <a href="#" class="gsap-item border border-gray-300 px-3 py-1.5 rounded hover:border-[var(--pink)] hover:text-[var(--pink)] transition-colors">English </a>
-        <a href="#" class="gsap-item border border-gray-300 px-3 py-1.5 rounded hover:border-[var(--pink)] hover:text-[var(--pink)] transition-colors">Urdu  </a>
+        {% for value, label in language_choices %}
+        <a href="?language={{ value }}" class="gsap-item border border-gray-300 px-3 py-1.5 rounded hover:border-[var(--pink)] hover:text-[var(--pink)] transition-colors">{{ label }}</a>
+    {% endfor %}
+    
     </div>
 </div>
+
+ 

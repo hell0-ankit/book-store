@@ -51,10 +51,18 @@ class Author(models.Model):
 class Publisher(models.Model):
     name = models.CharField(max_length=50)
     publication_date = models.DateField()
-    def __str__(self):
-        return self.name
+    slug = models.SlugField(max_length=120, unique=True, blank=True)
+
     class Meta:
         db_table = "book_publishers"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
 
 class ISBNConfig(models.Model):
     prefix = models.CharField(max_length=3, default="978")
