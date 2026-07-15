@@ -17,9 +17,6 @@ db.sqlite3
 *.sqlite3
 media/
 
-# Static Files 
-staticfiles/
-
 # Logs
 *.log
 
@@ -55,7 +52,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Tailwind Output 
+# Tailwind Output (agar generated CSS hai)
 tailwind_css/static/css/output.css
 
 # Misc
