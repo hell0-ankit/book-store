@@ -1,2 +1,63 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.env/
+venv/
+env/
+
+# Environment Variables
+.env
+.env.*
+
+# Django
+db.sqlite3
+*.sqlite3
+media/
+
+# Static Files (agar generated files hain)
+staticfiles/
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Python Packaging
+build/
+dist/
+*.egg-info/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Type Checker
+.mypy_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Node (Tailwind)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Tailwind Output (agar generated CSS hai)
+tailwind_css/static/css/output.css
+
+# Misc
+*.swp
+*.swo
