@@ -69,3 +69,21 @@ new Swiper(".category-slider", {
         buttonElement.classList.add('text-[var(--pink)]', 'border-b-2', 'border-[var(--pink)]');
         buttonElement.classList.remove('text-gray-400');
     }
+
+
+// increse quntity real time
+document.addEventListener("DOMContentLoaded", function () {
+    const quantityInput = document.getElementById("quantity-input");
+    const increaseBtn = document.getElementById("increase-btn");
+    const decreaseBtn = document.getElementById("decrease-btn");
+
+    increaseBtn.addEventListener("click", function () {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+    });
+
+    decreaseBtn.addEventListener("click", function () {
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+    });
+});

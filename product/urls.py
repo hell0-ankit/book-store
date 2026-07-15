@@ -4,5 +4,7 @@ from django.urls import path
 urlpatterns = [
     path('product-listing/', views.productListing, name='product-listing'),
     path('product-detail/<slug:slug>/', views.productDetail, name='product-detail'), 
+    path("collection/", views.collection, name="collection"),
+
 ]
 

@@ -1,10 +1,11 @@
-from django.db import models
+from django.db import models 
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 
 class Language(models.TextChoices):
-    HINDI = "hindi", "Hindi"
-    ENGLISH = "english", "English"
+    HINDI = "HI", "Hindi"
+    ENGLISH = "EN", "English"
+    URDU = "UR", "Urdu"
 
 class Stock(models.TextChoices):
     IN_STOCK = "in_stock", "In Stock"
@@ -27,6 +28,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
     class Meta:
         db_table = "book_categories"
         verbose_name_plural = "Categories"
@@ -49,10 +51,18 @@ class Author(models.Model):
 class Publisher(models.Model):
     name = models.CharField(max_length=50)
     publication_date = models.DateField()
-    def __str__(self):
-        return self.name
+    slug = models.SlugField(max_length=120, unique=True, blank=True)
+
     class Meta:
         db_table = "book_publishers"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
 
 class ISBNConfig(models.Model):
     prefix = models.CharField(max_length=3, default="978")
@@ -82,12 +92,14 @@ class Book(models.Model):
     categories = models.ManyToManyField(Category, related_name='books')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount_price = models.DecimalField(max_digits=10, decimal_places=2)
+    discount_percentage = models.PositiveIntegerField(default=0) 
     stock= models.CharField(max_length=50, choices=Stock.choices, default=Stock.IN_STOCK)  # will add business logic so now manually select stock 
     cover_image= models.ImageField(upload_to='books_cover_image/')
     isbn = models.CharField(max_length=13, unique=True, blank=True)
     page_count = models.PositiveIntegerField()
     language = models.CharField(max_length=50, choices=Language.choices, default=Language.HINDI)
     description = models.TextField()
+    publication_date = models.DateField(auto_now_add=False)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
