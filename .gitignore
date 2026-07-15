@@ -17,9 +17,6 @@ db.sqlite3
 *.sqlite3
 media/
 
-# Static Files (agar generated files hain)
-staticfiles/
-
 # Logs
 *.log
 
