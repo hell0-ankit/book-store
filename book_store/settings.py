@@ -71,7 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # added context_procees files
-                'product.context_processors.book_filters', 
+                'product.context_processors.book_collections', 
                 'cart.context_processors.cart_items', 
             ],
         },

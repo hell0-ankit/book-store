@@ -25,58 +25,115 @@
 <!-- Category Cards -->
 <section class="section-full bg-[var(--white)]">
     <div class="w-full max-w-7xl mx-auto px-4 py-12">
-        <h2 class="main-heading text-center  mb-10 tracking-tight"> Browse  <span class="text-pink">Categories</span></h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            <div class="bg-[var(--bg-card)] border border-[var(--pink)] rounded-xl p-5 sm:p-6 flex flex-col items-center justify-center text-center transition-all duration-300  hover:shadow-md cursor-pointer group">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 mb-4 flex items-center justify-center bg-[var(--pink-light)] rounded-full shadow-sm transition-transform duration-300 group-hover:scale-110">
-                    <img src="{% static 'img/healthcare.png' %}" alt="Health" class="w-8 h-8 sm:w-10 sm:h-10 object-contain">
+        <h2 class="main-heading   mb-10 tracking-tight"> Browse  <span class="text-pink">Categories</span></h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for  categories in book_categories %}
+            <div class="relative bg-[var(--white)] border border-gray-100 rounded-2xl p-6 flex flex-col items-center text-center shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group cursor-pointer">
+                <div class="relative w-24 h-24 mb-4">
+                    <div class="absolute inset-0 rounded-full bg-[var(--pink-light)] scale-100 group-hover:scale-110 transition-transform duration-300"></div>
+                    <img src="{{categories.cover_image.url}}"
+                         alt="{{categories.name}}"
+                         class="relative w-24 h-24 object-cover rounded-full border-4 border-white shadow-sm">
                 </div>
-                    <h3 class="font-bold text-[var(--text-heading)] text-[16px] sm:text-[18px] tracking-wide">Health</h3>
-                    <p class="body-text text-xs sm:text-sm">142 Books</p>
+                <h3 class="font-bold text-[var(--text-heading)] text-[17px]">
+                    {{categories.name}}
+                </h3>
+                <p class="body-text text-xs mb-4">
+                    {{categories.categories_count}} Books
+                </p>
+                <a href="#"
+                   class="text-xs font-bold uppercase tracking-wider underline underline-offset-4 hover:opacity-80 transition-opacity"
+                   style="color: var(--mint);">
+                    View Books
+                </a>
             </div>
+            {% endfor %}
 
-            
+
         </div>
     </div>
 </section>
 
 
+
+
 <!-- Author Cards -->
 <section class="section-full">
     <div class="w-full max-w-7xl mx-auto px-4 py-12">
-        <h2 class="main-heading text-center mb-10 tracking-tight">
+        <h2 class="main-heading  mb-10 tracking-tight">
             Featured <span class="text-pink">Authors</span>
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for  authors in book_authors %}
             <div class="relative bg-[var(--white)] border border-gray-100 rounded-2xl p-6 flex flex-col items-center text-center shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group cursor-pointer">
                 <div class="relative w-24 h-24 mb-4">
                     <div class="absolute inset-0 rounded-full bg-[var(--pink-light)] scale-100 group-hover:scale-110 transition-transform duration-300"></div>
-                    <img src="{% static 'img/book.webp' %}"
+                    <img src="{{authors.cover_image.url}}"
                          alt="Author name"
                          class="relative w-24 h-24 object-cover rounded-full border-4 border-white shadow-sm">
                 </div>
 
                 <h3 class="font-bold text-[var(--text-heading)] text-[17px]">
-                    Elena Marlowe
+                    {{authors.name}}
                 </h3>
 
                 <p class="body-text text-xs mb-4">
-                    24 Published Books
+                    {{authors.author_count}}     Books
                 </p>
 
-                <a href="#"
+                <a href="{% url 'product-listing' %}?authors={{ authors.slug }}"
                    class="text-xs font-bold uppercase tracking-wider underline underline-offset-4 hover:opacity-80 transition-opacity"
                    style="color: var(--mint);">
                     View Profile
                 </a>
 
             </div>
+            {% endfor %}
 
         </div>
     </div>
 </section>
 
 
+
+
+<!-- Author Cards -->
+<section class="section-full bg-[var(--white)]">
+    <div class="w-full max-w-7xl mx-auto px-4 py-12">
+        <h2 class="main-heading  mb-10 tracking-tight">
+            Featured <span class="text-pink">Authors</span>
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for  publishers in book_publishers %}
+            <div class="relative bg-[var(--white)] border border-gray-100 rounded-2xl p-6 flex flex-col items-center text-center shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group cursor-pointer">
+                <div class="relative w-24 h-24 mb-4">
+                    <div class="absolute inset-0 rounded-full bg-[var(--pink-light)] scale-100 group-hover:scale-110 transition-transform duration-300"></div>
+                    <img src="{{publishers.cover_image.url}}"
+                         alt="Author name"
+                         class="relative w-24 h-24 object-cover rounded-full border-4 border-white shadow-sm">
+                </div>
+
+                <h3 class="font-bold text-[var(--text-heading)] text-[17px]">
+                    {{publishers.name}}
+                </h3>
+
+                <p class="body-text text-xs mb-4">
+                    {{publishers.publishers_count}}     Books
+                </p>
+
+                <a href="{% url 'product-listing' %}?publisher={{ publishers.slug }}"
+                   class="text-xs font-bold uppercase tracking-wider underline underline-offset-4 hover:opacity-80 transition-opacity"
+                   style="color: var(--mint);">
+                    View Profile
+                </a>
+
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% comment %} 
 <!-- Publisher Cards -->
 <section class="section-full bg-[var(--white)]">
     <div class="w-full max-w-7xl mx-auto px-4 py-12">
@@ -136,6 +193,6 @@
 
     </div>
   </div>
-</section>
+</section> {% endcomment %}
 
 {% endblock %}

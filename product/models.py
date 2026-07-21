@@ -51,6 +51,7 @@ class Author(models.Model):
 class Publisher(models.Model):
     name = models.CharField(max_length=50)
     publication_date = models.DateField()
+    cover_image= models.ImageField(upload_to='author_profile/', null=True)
     slug = models.SlugField(max_length=120, unique=True, blank=True)
 
     class Meta:
