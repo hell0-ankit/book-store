@@ -5,7 +5,7 @@
         <!-- Metric 1: Wallet Points -->
         <div class="bg-white p-4 rounded-xl border border-gray-200/80 shadow-sm flex flex-col justify-between">
             <div class="flex items-center justify-between w-full">
-                <span class="text-[10px] font-bold text-[var(--text-body)] uppercase tracking-wider">Reward Points</span>
+                <span class="text-[10px] font-bold text-[var(--text-body)] uppercase tracking-wider">Total Spent</span>
                 <div class="w-7 h-7 rounded-lg bg-emerald-50 text-[var(--mint)] flex items-center justify-center text-xs">
                     <i class="fas fa-star"></i>
                 </div>
@@ -18,20 +18,20 @@
         <!-- Metric 2: Active Shipments -->
         <div class="bg-white p-4 rounded-xl border border-gray-200/80 shadow-sm flex flex-col justify-between">
             <div class="flex items-center justify-between w-full">
-                <span class="text-[10px] font-bold text-[var(--text-body)] uppercase tracking-wider">In Transit</span>
+                <span class="text-[10px] font-bold text-[var(--text-body)] uppercase tracking-wider">Active Orders</span>
                 <div class="w-7 h-7 rounded-lg bg-[var(--pink-light)] text-[var(--pink)] flex items-center justify-center text-xs">
                     <i class="fas fa-truck"></i>
                 </div>
             </div>
             <div class="mt-2">
-                <h3 class="text-lg font-bold text-[var(--text-heading)]">01 <span class="text-xs font-normal text-[var(--text-body)]">Order</span></h3>
+                <h3 class="text-lg font-bold text-[var(--text-heading)]">{{orders.total}}<span class="text-xs font-normal text-[var(--text-body)]">Order</span></h3>
             </div>
-        </div>
+        </div>  
 
         <!-- Metric 3: Wishlist Count -->
         <div class="bg-white p-4 rounded-xl border border-gray-200/80 shadow-sm flex flex-col justify-between">
             <div class="flex items-center justify-between w-full">
-                <span class="text-[10px] font-bold text-[var(--text-body)] uppercase tracking-wider">Saved Items</span>
+                <span class="text-[10px] font-bold text-[var(--text-body)] uppercase tracking-wider">Cart Items</span>
                 <div class="w-7 h-7 rounded-lg bg-purple-50 text-purple-500 flex items-center justify-center text-xs">
                     <i class="fas fa-heart"></i>
                 </div>
@@ -44,7 +44,7 @@
         <!-- Metric 4: Total Delivered -->
         <div class="bg-white p-4 rounded-xl border border-gray-200/80 shadow-sm flex flex-col justify-between">
             <div class="flex items-center justify-between w-full">
-                <span class="text-[10px] font-bold text-[var(--text-body)] uppercase tracking-wider">Total Bought</span>
+                <span class="text-[10px] font-bold text-[var(--text-body)] uppercase tracking-wider">Books Purchased</span>
                 <div class="w-7 h-7 rounded-lg bg-gray-50 text-[var(--text-heading)] flex items-center justify-center text-xs">
                     <i class="fas fa-check-double"></i>
                 </div>
@@ -83,26 +83,7 @@
                     <div class="flex items-center justify-between sm:justify-end gap-4 mt-2 sm:mt-0">
                         <span class="font-bold text-[var(--text-heading)]">₹299.00</span>
                         <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-[var(--mint)]">
-                            Shipped
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Order 2 Item -->
-                <div class="py-3 flex.col sm:flex sm:items-center justify-between gap-3">
-                    <div class="flex items-center gap-3 min-w-0">
-                        <div class="w-9 h-12 bg-gray-50 border border-gray-100 rounded flex items-center justify-center text-gray-400 shrink-0">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="min-w-0">
-                            <span class="font-bold text-[var(--text-heading)] block truncate max-w-[180px]">Atomic Habits</span>
-                            <span class="text-[10px] text-[var(--text-body)] block mt-0.5">ID: #LS-102389 • Mar 23, 2026</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between sm:justify-end gap-4 mt-2 sm:mt-0">
-                        <span class="font-bold text-[var(--text-heading)]">₹450.00</span>
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-600">
-                            Delivered
+                            Book Status
                         </span>
                     </div>
                 </div>
@@ -124,7 +105,9 @@
 
             <!-- Vertical Recommendations List -->
             <div class="space-y-3">
+                <h2 class=" text-center text-[var(--pink)]">Upcoming Features</h2>
                 <!-- Book Item 1 -->
+                <!--
                 <div class="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50/50 border border-transparent hover:border-gray-100 transition-all group">
                     <div class="w-10 h-14 bg-gray-50 border border-gray-100 rounded-lg flex items-center justify-center text-gray-400 shrink-0">
                         <i class="fas fa-book text-xs"></i>
@@ -138,21 +121,7 @@
                         <i class="fas fa-shopping-cart text-[10px]"></i>
                     </button>
                 </div>
-
-                <!-- Book Item 2 -->
-                <div class="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50/50 border border-transparent hover:border-gray-100 transition-all group">
-                    <div class="w-10 h-14 bg-gray-50 border border-gray-100 rounded-lg flex items-center justify-center text-gray-400 shrink-0">
-                        <i class="fas fa-book text-xs"></i>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                        <span class="font-bold text-xs text-[var(--text-heading)] block truncate group-hover:text-[var(--pink)] transition-colors">Show Your Work!</span>
-                        <span class="text-[10px] text-[var(--text-body)] block mt-0.5">Austin Kleon</span>
-                        <span class="font-bold text-xs text-[var(--text-heading)] block mt-1">₹250.00</span>
-                    </div>
-                    <button type="button" class="w-7 h-7 rounded-lg border border-gray-200 text-gray-400 hover:text-[var(--pink)] hover:bg-[var(--pink-light)] flex items-center justify-center transition-all">
-                        <i class="fas fa-shopping-cart text-[10px]"></i>
-                    </button>
-                </div>
+                -->
             </div>
         </div>
 

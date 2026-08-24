@@ -53,7 +53,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
                             <i class="far fa-user text-sm"></i>
                         </div>
-                        <input type="text" name="name" value="{{ user.get_full_name|default:'' }}" required placeholder="Enter full name"
+                        <input type="text" name="name" value="{{ user.get_full_name}}" required placeholder="Enter full name"
                                class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 text-sm rounded-xl text-gray-900 placeholder-gray-400 focus:ring-1 focus:ring-[var(--pink)] focus:border-[var(--pink)] focus:outline-none font-medium transition-all shadow-sm">
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
                             <i class="far fa-envelope text-sm"></i>
                         </div>
-                        <input type="email" name="email" value="{{ user.email|default:'' }}" required placeholder="name@example.com"
+                        <input type="email" name="email" value="{{ user.email}}" required 
                                class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 text-sm rounded-xl text-gray-900 placeholder-gray-400 focus:ring-1 focus:ring-[var(--pink)] focus:border-[var(--pink)] focus:outline-none font-medium transition-all shadow-sm">
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                             <i class="far fa-calendar text-sm"></i>
                         </div>
                         <input type="date" name="dob" value="{{ profile.dob|date:'Y-m-d'|default:'' }}"
-                               class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 text-sm rounded-xl text-gray-900 placeholder-gray-400 focus:ring-1 focus:ring-[var(--pink)] focus:border-[var(--pink)] focus:outline-none font-medium transition-all shadow-sm">
+                            class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 text-sm rounded-xl text-gray-900 placeholder-gray-400 focus:ring-1 focus:ring-[var(--pink)] focus:border-[var(--pink)] focus:outline-none font-medium transition-all shadow-sm">
                     </div>
                 </div>
                 <div class="space-y-1.5">
@@ -99,19 +99,11 @@
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
                             <i class="fas fa-user text-sm"></i>
                         </div>
-
-                        <select name="gender"
-                            class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 text-sm rounded-xl text-gray-900 focus:ring-1 focus:ring-[var(--pink)] focus:border-[var(--pink)] focus:outline-none font-medium transition-all shadow-sm">
-
+                        <select name="gender" class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 text-sm rounded-xl text-gray-900 focus:ring-1 focus:ring-[var(--pink)] focus:border-[var(--pink)] focus:outline-none font-medium transition-all shadow-sm">
                             <option value="">Select Gender</option>
-
-                            {% for value, label in form.gender.field.choices %}
-                                <option value="{{ value }}"
-                                    {% if form.gender.value == value %}selected{% endif %}>
-                                    {{ label }}
-                                </option>
-                            {% endfor %}
-
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                 </div>

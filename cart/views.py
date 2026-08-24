@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from product.models import Book
 from cart.models import Cart, CartItem
+from django.contrib import messages
+
 
 
 
@@ -22,7 +24,7 @@ def add_to_cart(request, book_id):
     if not created:
         cart_item.quantity += quantity
         cart_item.save()
-
+    messages.success(request, "Product added to cart.")
     return redirect("cart:cart")
 
 def cartDetail(request):

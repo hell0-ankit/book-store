@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.contrib.auth.models import User
 
 class CustomerStatus(models.TextChoices):
@@ -17,7 +16,7 @@ class Gender(models.TextChoices):
 class PersonalDetils(models.Model):
     user_details=models.OneToOneField(User, on_delete=models.CASCADE)
     cm_phone = models.CharField(unique=True, max_length=50)
-    cm_gender = models.CharField(max_length=20, choices=Gender.choices)
+    cm_gender = models.CharField(max_length=20)
     cm_dob = models.TimeField(auto_now=False, auto_now_add=False)
     address = models.TextField(blank=True)
     profile_image = models.ImageField(upload_to='userprofile/')

@@ -43,11 +43,15 @@
 
         <div class="min-w-0 w-full overflow-hidden">
             <header class="h-16 bg-[var(--bg-card)] border-b border-gray-200 flex items-center justify-between px-4 md:px-6 w-full">
-    
+    {% if user.is_authenticated %}
     <h2 class="text-base md:text-lg font-bold text-[var(--text-heading)] truncate">
-        Welcome back, Rahul!
+        Welcome back,  {{ user.first_name }}!!
     </h2>
-
+    {% else %}
+    <h2 class="text-base md:text-lg font-bold text-[var(--text-heading)] truncate">
+        Welcome back,  user!!
+    </h2>
+    {% endif %}
     <button class="flex items-center gap-2 focus:outline-none p-1 rounded-xl hover:bg-gray-50 transition-colors group">
         <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60" 
              alt="Avatar" 
