@@ -46,5 +46,29 @@ def checkoutViews(request):
 
     return render(request, "orders/checkout.html", context)
 
+
+
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from orders.models import Order
+
+
+
+
+@login_required
 def orderSuccessViews(request):
-    return render(request, 'orders/order-success.html')
+    all_orders = Order.objects.filter(user=request.user)
+
+    orders_qs = all_orders.prefetch_related("items__book").order_by("-created_at")
+    paginator = Paginator(orders_qs, 3)  # per page 3, screenshot jaisa
+    page_obj = paginator.get_page(request.GET.get("page"))
+
+    return render(request, 'customer_dashboard/cm_orders.html', {
+        "total_orders": all_orders.count(),
+        "active_orders": all_orders.filter(
+            status__in=[Order.Status.PENDING, Order.Status.CONFIRMED, Order.Status.SHIPPED]
+        ).count(),
+        "total_spent": all_orders.aggregate(total=Sum("total"))["total"] or 0,
+        "page_obj": page_obj,
+        "orders": page_obj.object_list,
+    })

@@ -5,7 +5,7 @@
         <div class="bg-white p-4 rounded-xl border border-gray-200/80 shadow-sm flex items-center justify-between">
             <div>
                 <p class="text-xs font-medium text-[var(--text-body)] uppercase tracking-wider">Total Orders</p>
-                <h3 class="text-xl font-bold text-[var(--text-heading)] mt-1">{{total_orders}}</h3>
+                <h3 class="text-xl font-bold text-[var(--text-heading)] mt-1">{{ total_orders }}</h3>
             </div>
             <div class="w-10 h-10 rounded-xl bg-[var(--pink-light)] text-[var(--pink)] flex items-center justify-center">
                 <i class="fas fa-shopping-bag text-sm"></i>
@@ -15,7 +15,7 @@
         <div class="bg-white p-4 rounded-xl border border-gray-200/80 shadow-sm flex items-center justify-between">
             <div>
                 <p class="text-xs font-medium text-[var(--text-body)] uppercase tracking-wider">Active Orders</p>
-                <h3 class="text-xl font-bold text-[var(--text-heading)] mt-1">14 Items</h3>
+                <h3 class="text-xl font-bold text-[var(--text-heading)] mt-1">{{ active_orders }} Order{{ active_orders|pluralize }}</h3>
             </div>
             <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center">
                 <i class="fas fa-truck text-sm"></i>
@@ -25,7 +25,7 @@
         <div class="bg-white p-4 rounded-xl border border-gray-200/80 shadow-sm flex items-center justify-between">
             <div>
                 <p class="text-xs font-medium text-[var(--text-body)] uppercase tracking-wider">Total Spend</p>
-                <h3 class="text-xl font-bold text-[var(--text-heading)] mt-1">₹4,590</h3>
+                <h3 class="text-xl font-bold text-[var(--text-heading)] mt-1">₹{{ total_spent }}</h3>
             </div>
             <div class="w-10 h-10 rounded-xl bg-emerald-50 text-[var(--mint)] flex items-center justify-center">
                 <i class="fas fa-wallet text-sm"></i>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-        
+
         <div class="p-4 md:p-5 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white">
             <div>
                 <h3 class="text-base font-bold text-[var(--text-heading)]"> Orders History</h3>
@@ -53,93 +53,73 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-sm">
-                    
+                    {% for order in orders %}
                     <tr class="hover:bg-gray-50/50 transition-colors">
                         <td class="py-4 px-5">
-                            <span class="font-bold text-[var(--text-heading)]">#LS-9402</span>
-                            <div class="text-xs text-[var(--text-body)] mt-0.5">June 18, 2026</div>
+                            <span class="font-bold text-[var(--text-heading)]">#ORD-{{ order.id }}</span>
+                            <div class="text-xs text-[var(--text-body)] mt-0.5">{{ order.created_at|date:"F j, Y" }}</div>
                         </td>
                         <td class="py-4 px-5">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-14 bg-gray-100 rounded border border-gray-200 shrink-0 flex items-center justify-center text-gray-400">
-                                    <i class="fas fa-book text-xs"></i> </div>
-                                <div class="min-w-0">
-                                    <h4 class="font-semibold text-[var(--text-heading)] truncate max-w-[180px]">The Psychology of Money</h4>
-                                    <p class="text-xs text-[var(--text-body)] mt-0.5">Qty: 1 • Paperback</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-4 px-5 font-semibold text-[var(--text-heading)]">₹350</td>
-                        <td class="py-4 px-5">
-                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-[var(--mint)]">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[var(--mint)]"></span> Delivered
-                            </span>
-                        </td>
-                    </tr>
-
-                    <tr class="hover:bg-gray-50/50 transition-colors">
-                        <td class="py-4 px-5">
-                            <span class="font-bold text-[var(--text-heading)]">#LS-8841</span>
-                            <div class="text-xs text-[var(--text-body)] mt-0.5">June 12, 2026</div>
-                        </td>
-                        <td class="py-4 px-5">
+                            {% with first_item=order.items.first %}
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-14 bg-gray-100 rounded border border-gray-200 shrink-0 flex items-center justify-center text-gray-400">
                                     <i class="fas fa-book text-xs"></i>
                                 </div>
                                 <div class="min-w-0">
-                                    <h4 class="font-semibold text-[var(--text-heading)] truncate max-w-[180px]">Atomic Habits</h4>
-                                    <p class="text-xs text-[var(--text-body)] mt-0.5">Qty: 2 • Hardcover</p>
+                                    <h4 class="font-semibold text-[var(--text-heading)] truncate max-w-[180px]">{{ first_item.book.title }}</h4>
+                                    <p class="text-xs text-[var(--text-body)] mt-0.5">
+                                        Qty: {{ first_item.quantity }}{% if order.items.count > 1 %} • +{{ order.items.count|add:"-1" }} more{% endif %}
+                                    </p>
                                 </div>
                             </div>
+                            {% endwith %}
                         </td>
-                        <td class="py-4 px-5 font-semibold text-[var(--text-heading)]">₹798</td>
+                        <td class="py-4 px-5 font-semibold text-[var(--text-heading)]">₹{{ order.total }}</td>
                         <td class="py-4 px-5">
-                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[var(--pink-light)] text-[var(--pink)]">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[var(--pink)]"></span> Shipping
-                            </span>
+                            {% if order.status == "Delivered" %}
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-[var(--mint)]"><span class="w-1.5 h-1.5 rounded-full bg-[var(--mint)]"></span> Delivered</span>
+                            {% elif order.status == "Shipped" %}
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[var(--pink-light)] text-[var(--pink)]"><span class="w-1.5 h-1.5 rounded-full bg-[var(--pink)]"></span> Shipped</span>
+                            {% elif order.status == "Cancelled" %}
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Cancelled</span>
+                            {% else %}
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-500"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> {{ order.status }}</span>
+                            {% endif %}
                         </td>
-                        
                     </tr>
-
-                    <tr class="hover:bg-gray-50/50 transition-colors">
-                        <td class="py-4 px-5">
-                            <span class="font-bold text-[var(--text-heading)]">#LS-7310</span>
-                            <div class="text-xs text-[var(--text-body)] mt-0.5">May 29, 2026</div>
-                        </td>
-                        <td class="py-4 px-5">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-14 bg-gray-100 rounded border border-gray-200 shrink-0 flex items-center justify-center text-gray-400">
-                                    <i class="fas fa-book text-xs"></i>
-                                </div>
-                                <div class="min-w-0">
-                                    <h4 class="font-semibold text-[var(--text-heading)] truncate max-w-[180px]">Deep Work</h4>
-                                    <p class="text-xs text-[var(--text-body)] mt-0.5">Qty: 1 • E-Book</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-4 px-5 font-semibold text-[var(--text-heading)]">₹180</td>
-                        <td class="py-4 px-5">
-                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-500">
-                                <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Cancelled
-                            </span>
-                        </td>
-                        
-                    </tr>
-
+                    {% empty %}
+                    <tr><td colspan="4" class="py-6 text-center text-sm text-gray-400">Abhi koi order nahi hai.</td></tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
 
+        {% if page_obj.paginator.num_pages > 1 %}
         <div class="p-4 border-t border-gray-100 flex items-center justify-between text-xs text-[var(--text-body)] font-medium bg-white">
-            <div>Showing 1 to 3 of 12 orders</div>
+            <div>Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ total_orders }} orders</div>
             <div class="flex items-center gap-1">
-                <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50"><i class="fas fa-chevron-left text-[10px]"></i></button>
-                <button class="w-7 h-7 flex items-center justify-center bg-[var(--pink-light)] text-[var(--pink)] border border-[var(--pink-light)] rounded-lg font-bold">1</button>
-                <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded-lg hover:bg-gray-50">2</button>
-                <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded-lg hover:bg-gray-50"><i class="fas fa-chevron-right text-[10px]"></i></button>
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded-lg hover:bg-gray-50"><i class="fas fa-chevron-left text-[10px]"></i></a>
+                {% else %}
+                <button disabled class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded-lg opacity-50"><i class="fas fa-chevron-left text-[10px]"></i></button>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if num == page_obj.number %}
+                    <span class="w-7 h-7 flex items-center justify-center bg-[var(--pink-light)] text-[var(--pink)] border border-[var(--pink-light)] rounded-lg font-bold">{{ num }}</span>
+                    {% else %}
+                    <a href="?page={{ num }}" class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded-lg hover:bg-gray-50">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded-lg hover:bg-gray-50"><i class="fas fa-chevron-right text-[10px]"></i></a>
+                {% else %}
+                <button disabled class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded-lg opacity-50"><i class="fas fa-chevron-right text-[10px]"></i></button>
+                {% endif %}
             </div>
         </div>
+        {% endif %}
 
     </div>
 </div>

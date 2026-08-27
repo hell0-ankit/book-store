@@ -38,7 +38,8 @@ class Order(models.Model):
         Address, 
         on_delete=models.SET_NULL, 
         null=True, 
-        blank=True
+        blank=True,
+        related_name="orders"
     )
 
     total = models.DecimalField(max_digits=10, decimal_places=2)

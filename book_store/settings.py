@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'accounts',
     'cart',
     'orders',
-    'customer_dashboard',
+    'customer_dashboard'
     
 ]
 
