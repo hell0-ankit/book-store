@@ -1,40 +1,47 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
+from django.contrib import messages
 from cart.models import Cart
 from .models import Address, Order, OrderItem
 
 
+@login_required
 def checkoutViews(request):
-
     cart = get_object_or_404(Cart, user=request.user)
 
+    if not cart.items.exists():
+        messages.warning(request, "Your cart is empty.")
+        return redirect("cart:cart_detail")
+
     if request.method == "POST":
-
-        address = Address.objects.create(
-            user=request.user,
-            full_name=request.POST.get("full_name"),
-            email=request.POST.get("email"),
-            phone=request.POST.get("phone"),
-            address=request.POST.get("address"),
-            city=request.POST.get("city"),
-            pincode=request.POST.get("pincode"),
-        )
-
-        order = Order.objects.create(
-            user=request.user,
-            address=address,
-            total=cart.total,
-        )
-
-        for item in cart.items.all():
-
-            OrderItem.objects.create(
-                order=order,
-                book=item.book,
-                quantity=item.quantity,
-                price=item.book.discount_price,
+        with transaction.atomic():
+            address = Address.objects.create(
+                user=request.user,
+                full_name=request.POST.get("full_name"),
+                email=request.POST.get("email"),
+                phone=request.POST.get("phone"),
+                address=request.POST.get("address"),
+                city=request.POST.get("city"),
+                pincode=request.POST.get("pincode"),
             )
 
-        cart.items.all().delete()
+            order = Order.objects.create(
+                user=request.user,
+                address=address,
+                total=cart.total,
+            )
+
+            for item in cart.items.all():
+                unit_price = item.book.discount_price or item.book.price
+                OrderItem.objects.create(
+                    order=order,
+                    book=item.book,
+                    quantity=item.quantity,
+                    price=unit_price,
+                )
+
+            cart.items.all().delete()
 
         return redirect("orders:order_success")
 
@@ -43,32 +50,10 @@ def checkoutViews(request):
         "cart_items": cart.items.all(),
         "total": cart.total,
     }
-
     return render(request, "orders/checkout.html", context)
-
-
-
-from django.core.paginator import Paginator
-from django.contrib.auth.decorators import login_required
-from orders.models import Order
-
-
 
 
 @login_required
 def orderSuccessViews(request):
-    all_orders = Order.objects.filter(user=request.user)
-
-    orders_qs = all_orders.prefetch_related("items__book").order_by("-created_at")
-    paginator = Paginator(orders_qs, 3)  # per page 3, screenshot jaisa
-    page_obj = paginator.get_page(request.GET.get("page"))
-
-    return render(request, 'customer_dashboard/cm_orders.html', {
-        "total_orders": all_orders.count(),
-        "active_orders": all_orders.filter(
-            status__in=[Order.Status.PENDING, Order.Status.CONFIRMED, Order.Status.SHIPPED]
-        ).count(),
-        "total_spent": all_orders.aggregate(total=Sum("total"))["total"] or 0,
-        "page_obj": page_obj,
-        "orders": page_obj.object_list,
-    })
+    order = Order.objects.filter(user=request.user).order_by("-created_at").first()
+    return render(request, "orders/order-success.html", {"order": order})

@@ -4,7 +4,7 @@
 
 {% block content %}
 <main class="container-custom py-16 md:py-24 max-w-2xl text-center">
-    
+
     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-50 text-[var(--mint)] border border-emerald-100 shadow-sm text-3xl mb-6">
         <i class="fa-solid fa-circle-check"></i>
     </div>
@@ -19,11 +19,12 @@
         </p>
     </div>
 
+    {% if order %}
     <div class="bg-[var(--white)] border border-gray-200 rounded-xl p-5 md:p-6 my-8 shadow-sm text-left grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-        
+
         <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col">
             <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">Order Reference ID</span>
-            <span class="text-[15px] text-[var(--text-heading)] font-black tracking-wide mt-1">#LIT-2026-0041</span>
+            <span class="text-[15px] text-[var(--text-heading)] font-black tracking-wide mt-1">#ORD-{{ order.id }}</span>
         </div>
 
         <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col">
@@ -32,19 +33,24 @@
         </div>
 
         <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col">
-            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">Payment Selected</span>
-            <span class="text-sm text-[var(--text-heading)] font-semibold mt-1">Cash On Delivery (COD)</span>
+            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">Payment Status</span>
+            <span class="text-sm text-[var(--text-heading)] font-semibold mt-1">{{ order.get_payment_status_display }}</span>
         </div>
 
         <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col">
             <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">Grand Total Settled</span>
-            <span class="text-sm text-[var(--text-heading)] font-bold mt-1">$20.00</span>
+            <span class="text-sm text-[var(--text-heading)] font-bold mt-1">₹{{ order.total }}</span>
         </div>
-        
+
     </div>
+    {% else %}
+    <div class="my-8 text-sm text-gray-500">
+        We couldn't find your recent order details right now — but don't worry, your order has been placed. Check your order history below.
+    </div>
+    {% endif %}
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="#" class="w-full sm:w-auto h-11 px-8 border border-gray-200 bg-white text-gray-700 text-xs font-bold uppercase tracking-wider rounded-lg transition-all flex items-center justify-center gap-2 hover:bg-gray-50 shadow-sm">
+        <a href="{% url 'cm_orders_history' %}" class="w-full sm:w-auto h-11 px-8 border border-gray-200 bg-white text-gray-700 text-xs font-bold uppercase tracking-wider rounded-lg transition-all flex items-center justify-center gap-2 hover:bg-gray-50 shadow-sm">
             <i class="fa-solid fa-rectangle-list"></i>
             <span>Track Order History</span>
         </a>
@@ -56,7 +62,7 @@
     </div>
 
     <p class="text-xs text-gray-400 font-medium mt-10">
-        Having technical logistics queries regarding processing flags? 
+        Having technical logistics queries regarding processing flags?
         <a href="#" class="text-[var(--pink)] hover:underline">Contact Literati Support Desk</a>
     </p>
 

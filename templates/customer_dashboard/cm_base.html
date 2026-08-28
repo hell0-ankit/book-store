@@ -1,77 +1,77 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Customer Dashboard {% endblock %}
+{% block title %}Customer Dashboard{% endblock %}
 
 {% block content %}
 <section class="w-full max-w-7xl mx-auto px-4 py-6">
-  <div  class="bg-[var(--pink-light)] relative rounded-xl overflow-hidden min-h-[80px] sm:min-h-[90px] flex  justify-between  group border border-gray-100 shadow-sm">
-        <aside class="hidden md:flex flex-col w-64 bg-[var(--bg-card)] border-r border-gray-200 shrink-0">
-            <div class="h-16 flex items-center px-6 border-b border-gray-100">
-                <a href="#" class="text-xl font-bold flex items-center gap-2 text-[var(--text-heading)]">
-                    <span class="w-8 h-8 rounded-lg bg-[var(--pink)] flex items-center justify-center text-white">
-                        <i class="fas fa-book-open text-sm"></i>
-                    </span>
-                    <span>Book<span class="text-[var(--pink)]">Store</span></span>
-                </a>
-            </div>
+  <div class="flex bg-[var(--bg-card)] rounded-xl overflow-hidden border border-gray-100 shadow-sm min-h-[calc(100vh-120px)]">
 
-            <nav class="flex-1 overflow-y-auto p-4 space-y-1">
-                <a href="{% url 'customer_dashboard' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--pink-light)] text-[var(--pink)] font-semibold transition-all">
-                    <i class="fas fa-th-large w-5"></i>
-                    <span>Dashboard</span>
-                </a>
-                
-                <a href="{% url 'cm_orders_history'  %}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[var(--text-body)] hover:bg-[var(--pink-light)] hover:text-[var(--pink)] font-medium transition-all">
-                    <i class="fas fa-shopping-bag w-5"></i>
-                    <span>My Orders</span>
-                </a>
-
-
-                <a href="{% url 'cm_personal_details' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[var(--text-body)] hover:bg-[var(--pink-light)] hover:text-[var(--pink)] font-medium transition-all">
-                    <i class="fas fa-user w-5"></i>
-                    <span>Personal Details </span>
-                </a>
-            </nav>
-
-            <div class="p-4 border-t border-gray-100">
-                <a href="{% url 'logout'  %}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 font-medium transition-all">
-                    <i class="fas fa-sign-out-alt w-5"></i>
-                    <span>Logout</span>
-                </a>
-            </div>
-        </aside>
-
-        <div class="min-w-0 w-full overflow-hidden">
-            <header class="h-16 bg-[var(--bg-card)] border-b border-gray-200 flex items-center justify-between px-4 md:px-6 w-full">
-    {% if user.is_authenticated %}
-    <h2 class="text-base md:text-lg font-bold text-[var(--text-heading)] truncate">
-        Welcome back,  {{ user.first_name }}!!
-    </h2>
-    {% else %}
-    <h2 class="text-base md:text-lg font-bold text-[var(--text-heading)] truncate">
-        Welcome back,  user!!
-    </h2>
-    {% endif %}
-    <button class="flex items-center gap-2 focus:outline-none p-1 rounded-xl hover:bg-gray-50 transition-colors group">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60" 
-             alt="Avatar" 
-             class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)] group-hover:ring-[var(--pink)] transition-all">
-    </button>
-
-</header>
-            <main class="flex-1 overflow-y-auto p-4 md:p-6">
-                
-                {% block contentbase %}
-                <div class="border-4 border-dashed border-gray-300 rounded-2xl h-full flex items-center justify-center text-[var(--text-body)]">
-                   
-
-
-                </div>
-                {% endblock %}
-
-            </main>
-
+    <aside class="hidden md:flex flex-col w-64 bg-[var(--bg-card)] border-r border-gray-200 shrink-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-100">
+            <a href="#" class="text-xl font-bold flex items-center gap-2 text-[var(--text-heading)]">
+                <span class="w-8 h-8 rounded-lg bg-[var(--pink)] flex items-center justify-center text-white">
+                    <i class="fas fa-book-open text-sm"></i>
+                </span>
+                <span>Book<span class="text-[var(--pink)]">Store</span></span>
+            </a>
         </div>
+
+        <nav class="flex-1 overflow-y-auto p-4 space-y-1">
+            <a href="{% url 'customer_dashboard' %}"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all
+               {% if request.resolver_match.url_name == 'customer_dashboard' %}bg-[var(--pink-light)] text-[var(--pink)] font-semibold{% else %}text-[var(--text-body)] hover:bg-[var(--pink-light)] hover:text-[var(--pink)]{% endif %}">
+                <i class="fas fa-th-large w-5"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="{% url 'cm_orders_history' %}"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all
+               {% if request.resolver_match.url_name == 'cm_orders_history' %}bg-[var(--pink-light)] text-[var(--pink)] font-semibold{% else %}text-[var(--text-body)] hover:bg-[var(--pink-light)] hover:text-[var(--pink)]{% endif %}">
+                <i class="fas fa-shopping-bag w-5"></i>
+                <span>My Orders</span>
+            </a>
+
+            <a href="{% url 'cm_personal_details' %}"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all
+               {% if request.resolver_match.url_name == 'cm_personal_details' or request.resolver_match.url_name == 'cm_update_personaldetail' %}bg-[var(--pink-light)] text-[var(--pink)] font-semibold{% else %}text-[var(--text-body)] hover:bg-[var(--pink-light)] hover:text-[var(--pink)]{% endif %}">
+                <i class="fas fa-user w-5"></i>
+                <span>Personal Details</span>
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-gray-100">
+            <a href="{% url 'logout' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 font-medium transition-all">
+                <i class="fas fa-sign-out-alt w-5"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <div class="min-w-0 w-full overflow-hidden">
+        <header class="h-16 bg-[var(--bg-card)] border-b border-gray-200 flex items-center justify-between px-4 md:px-6 w-full">
+            <h2 class="text-base md:text-lg font-bold text-[var(--text-heading)] truncate">
+                Welcome back, {{ user.first_name|default:user.username }}!!
+            </h2>
+            <button class="flex items-center gap-2 focus:outline-none p-1 rounded-xl hover:bg-gray-50 transition-colors group">
+                {% if profile.profile_image %}
+                    <img src="{{ profile.profile_image.url }}" alt="Avatar"
+                         class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)] group-hover:ring-[var(--pink)] transition-all">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60"
+                         alt="Avatar"
+                         class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)] group-hover:ring-[var(--pink)] transition-all">
+                {% endif %}
+            </button>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-4 md:p-6">
+            {% block contentbase %}
+            <div class="border-4 border-dashed border-gray-300 rounded-2xl h-full flex items-center justify-center text-[var(--text-body)]">
+            </div>
+            {% endblock %}
+        </main>
+    </div>
+
   </div>
 </section>
 {% endblock %}

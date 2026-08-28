@@ -7,4 +7,3 @@ urlpatterns = [
     path('cm_personal_details/', views.cmPersonalDetails, name='cm_personal_details'),
     path('cm_update_personaldetail/', views.cmPersonalDetailsForm, name="cm_update_personaldetail")
 ]
-

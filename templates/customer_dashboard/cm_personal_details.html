@@ -1,7 +1,7 @@
 {% extends "customer_dashboard/cm_base.html" %}
 {% block contentbase %}
 <div class="space-y-6">
-    
+
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-gray-100">
         <div>
             <h3 class="text-xl font-bold text-gray-900 tracking-tight">Personal Details</h3>
@@ -16,40 +16,37 @@
     </div>
 
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-        
+
         <div class="p-6 md:p-8 bg-gradient-to-r from-gray-50/70 via-transparent to-transparent flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 border-b border-gray-100">
             <div class="shrink-0">
-                {% if user.profile.avatar %}
-                    <img src="{{ user.profile.avatar.url }}" alt="User Profile" class="w-20 h-20 rounded-2xl object-cover ring-4 ring-white shadow-sm mx-auto">
+                {% if profile.profile_image %}
+                    <img src="{{ profile.profile_image.url }}" alt="User Profile" class="w-20 h-20 rounded-2xl object-cover ring-4 ring-white shadow-sm mx-auto">
                 {% else %}
                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="User Profile" class="w-20 h-20 rounded-2xl object-cover ring-4 ring-white shadow-sm mx-auto">
                 {% endif %}
             </div>
             <div class="space-y-2 flex-1 self-center">
                 <div class="flex items-center justify-center sm:justify-start gap-2.5 flex-wrap">
-                    <h4 class="text-lg font-bold text-gray-900 tracking-tight">{{ user.get_full_name }}</h4>
-                    <span class="inline-flex items-center px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-100">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
-                        Active Verified
-                    </span>
+                    <h4 class="text-lg font-bold text-gray-900 tracking-tight">{{ user.get_full_name|default:user.username }}</h4>
+                    
                 </div>
                 <p class="text-xs text-gray-500 flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="far fa-calendar-alt text-gray-400 text-sm"></i> 
-                    <span>Member since <span class="font-medium text-gray-700">Feb 2026</span></span>
+                    <i class="far fa-calendar-alt text-gray-400 text-sm"></i>
+                    <span>Member since <span class="font-medium text-gray-700">{{ user.date_joined|date:"M Y" }}</span></span>
                 </p>
             </div>
         </div>
 
         <div class="p-6 md:p-8 space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                
+
                 <div class="p-4 bg-gray-50/40 border border-gray-100 rounded-xl flex gap-3.5 items-center">
                     <div class="w-9 h-9 rounded-lg bg-white border border-gray-100 flex items-center justify-center text-gray-400 shrink-0 shadow-sm">
                         <i class="far fa-user text-sm"></i>
                     </div>
                     <div class="space-y-0.5 min-w-0">
                         <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">Full Name</span>
-                        <span class="text-sm font-semibold text-gray-900 block truncate">{{ user.get_full_name }}</span>
+                        <span class="text-sm font-semibold text-gray-900 block truncate">{{ user.get_full_name|default:user.username }}</span>
                     </div>
                 </div>
 
@@ -59,7 +56,7 @@
                     </div>
                     <div class="space-y-0.5 min-w-0">
                         <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">Email Address</span>
-                        <span class="text-sm font-semibold text-gray-900 block break-all truncate">{{ user.email|default:"rahul.singh@example.com" }}</span>
+                        <span class="text-sm font-semibold text-gray-900 block break-all truncate">{{ user.email|default:"—" }}</span>
                     </div>
                 </div>
 
@@ -69,7 +66,7 @@
                     </div>
                     <div class="space-y-0.5 min-w-0">
                         <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">Phone Number</span>
-                        <span class="text-sm font-semibold text-gray-900 block truncate">{{ profile.phone|default:"+91 9876543210" }}</span>
+                        <span class="text-sm font-semibold text-gray-900 block truncate">{{ profile.cm_phone|default:"Not added yet" }}</span>
                     </div>
                 </div>
 
@@ -79,7 +76,7 @@
                     </div>
                     <div class="space-y-0.5 min-w-0">
                         <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">Date of Birth</span>
-                        <span class="text-sm font-semibold text-gray-900 block truncate">{{ profile.dob}}</span>
+                        <span class="text-sm font-semibold text-gray-900 block truncate">{{ profile.cm_dob|default:"Not added yet" }}</span>
                     </div>
                 </div>
 
@@ -91,12 +88,11 @@
                 </div>
                 <div class="space-y-1 flex-1">
                     <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">Default Shipping Address</span>
-                    <span class="text-sm font-semibold text-gray-800 leading-relaxed block">{{ profile.address|default:"Sector 67, Noida, Uttar Pradesh - 201301" }}</span>
+                    <span class="text-sm font-semibold text-gray-800 leading-relaxed block">{{ profile.address|default:"Not added yet" }}</span>
                 </div>
             </div>
 
         </div>
-
     </div>
 </div>
 {% endblock contentbase %}
