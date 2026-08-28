@@ -6,7 +6,7 @@ from cart.models import Cart
 from .models import Address, Order, OrderItem
 
 
-@login_required
+@login_required(login_url="login")
 def checkoutViews(request):
     cart = get_object_or_404(Cart, user=request.user)
 
@@ -53,7 +53,7 @@ def checkoutViews(request):
     return render(request, "orders/checkout.html", context)
 
 
-@login_required
+@login_required(login_url="login")
 def orderSuccessViews(request):
     order = Order.objects.filter(user=request.user).order_by("-created_at").first()
     return render(request, "orders/order-success.html", {"order": order})

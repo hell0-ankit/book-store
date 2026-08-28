@@ -1,4 +1,6 @@
 {% extends "customer_dashboard/cm_base.html" %}
+{% load static %}
+
 {% block contentbase %}
 <div class="space-y-6">
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -61,13 +63,24 @@
                         <td class="py-4 px-5">
                             {% with first_item=order.items.first %}
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-14 bg-gray-100 rounded border border-gray-200 shrink-0 flex items-center justify-center text-gray-400">
-                                    <i class="fas fa-book text-xs"></i>
+                                <!-- Product Cover Image with Fallback -->
+                                <div class="w-12 h-16 bg-gray-100 rounded-lg border border-gray-200 shrink-0 overflow-hidden flex items-center justify-center shadow-xs">
+                                    {% if first_item.book.cover_image %}
+                                        <img 
+                                            src="{{ first_item.book.cover_image.url }}" 
+                                            alt="{{ first_item.book.title }}" 
+                                            class="w-full h-full object-cover"
+                                        >
+                                    {% else %}
+                                        <i class="fas fa-book text-gray-400 text-sm"></i>
+                                    {% endif %}
                                 </div>
                                 <div class="min-w-0">
-                                    <h4 class="font-semibold text-[var(--text-heading)] truncate max-w-[180px]">{{ first_item.book.title }}</h4>
+                                    <h4 class="font-semibold text-[var(--text-heading)] truncate max-w-[200px]">
+                                        {{ first_item.book.title|default:"Item unavailable" }}
+                                    </h4>
                                     <p class="text-xs text-[var(--text-body)] mt-0.5">
-                                        Qty: {{ first_item.quantity }}{% if order.items.count > 1 %} • +{{ order.items.count|add:"-1" }} more{% endif %}
+                                        Qty: {{ first_item.quantity|default:1 }}{% if order.items.count > 1 %} • +{{ order.items.count|add:"-1" }} more{% endif %}
                                     </p>
                                 </div>
                             </div>

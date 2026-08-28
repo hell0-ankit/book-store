@@ -49,20 +49,24 @@
 
     <div class="min-w-0 w-full overflow-hidden">
         <header class="h-16 bg-[var(--bg-card)] border-b border-gray-200 flex items-center justify-between px-4 md:px-6 w-full">
-            <h2 class="text-base md:text-lg font-bold text-[var(--text-heading)] truncate">
-                Welcome back, {{ user.first_name|default:user.username }}!!
-            </h2>
-            <button class="flex items-center gap-2 focus:outline-none p-1 rounded-xl hover:bg-gray-50 transition-colors group">
-                {% if profile.profile_image %}
-                    <img src="{{ profile.profile_image.url }}" alt="Avatar"
-                         class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)] group-hover:ring-[var(--pink)] transition-all">
-                {% else %}
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60"
-                         alt="Avatar"
-                         class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)] group-hover:ring-[var(--pink)] transition-all">
-                {% endif %}
-            </button>
-        </header>
+    <h2 class="text-base md:text-lg font-bold text-[var(--text-heading)] truncate">
+        Welcome back, {{ user.first_name|default:user.username }}!
+    </h2>
+    <div class="flex items-center gap-2 p-1 rounded-xl group">
+        {% if user.is_authenticated and user.profile.cover_image %}
+            <img src="{{ user.profile.cover_image.url }}" alt="Avatar"
+                 class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)] group-hover:ring-[var(--pink)] transition-all">
+        {% elif user.is_authenticated and user.profile.profile_image %}
+            <img src="{{ user.profile.profile_image.url }}" alt="Avatar"
+                 class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)] group-hover:ring-[var(--pink)] transition-all">
+        {% else %}
+            <!-- Default Avatar Fallback -->
+            <div class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-[var(--pink-light)] text-[var(--pink)] flex items-center justify-center font-bold text-sm">
+                {{ user.first_name|default:user.username|slice:":1"|upper }}
+            </div>
+        {% endif %}
+    </div>
+</header>
 
         <main class="flex-1 overflow-y-auto p-4 md:p-6">
             {% block contentbase %}

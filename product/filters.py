@@ -1,5 +1,6 @@
 from django.db.models import Q
-from .models import Book
+from .models import Book, Author
+from django.db.models import Count
 def filter_books(request):
     books = Book.objects.all()
     search = request.GET.get("search")
@@ -40,3 +41,10 @@ def get_top_discount_books(limit=8):
     return Book.objects.filter(
         discount_percentage__gt=0
     ).order_by("-discount_percentage", "-id")[:limit]
+
+
+def get_top_authors(limit=10):
+    """Returns top 10 authors ordered by their total active books count."""
+    return Author.objects.annotate(
+        total_books=Count("books")
+    ).order_by("-total_books", "name")[:limit]
