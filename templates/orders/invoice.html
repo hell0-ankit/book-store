@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice #ORD-{{ order.id }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { padding: 0; background: white; }
+            .invoice-card { border: none !important; box-shadow: none !important; padding: 0 !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 md:p-10 text-gray-800 font-sans">
+    <div class="relative max-w-3xl mx-auto bg-white p-6 md:p-10 rounded-2xl shadow-sm border border-gray-200 invoice-card overflow-hidden">
+        
+        <!-- Paid Watermark / Stamp -->
+        {% if order.payment_status == 'Paid' or order.payment_status == order.PaymentStatus.PAID %}
+        <div class="absolute right-12 top-28 pointer-events-none select-none opacity-20 transform -rotate-12 border-4 border-emerald-600 rounded-lg px-6 py-1">
+            <span class="text-4xl md:text-5xl font-black text-emerald-600 tracking-widest uppercase">PAID</span>
+        </div>
+        {% endif %}
+
+        <!-- Print / Continue Shopping Actions -->
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 no-print pb-6 border-b border-gray-100">
+            <a href="{% url 'product-listing' %}" class="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-black transition-colors">
+                <i class="fa-solid fa-arrow-left text-xs"></i>
+                <span>Back To Shop Page</span>
+            </a>
+            <div class="flex items-center gap-3">
+                <button onclick="window.print()" class="inline-flex items-center gap-2 bg-[var(--pink,#ff4a7a)] bg-pink-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition-all shadow-sm">
+                    <i class="fa-solid fa-print text-xs"></i>
+                    <span>Print / Download PDF</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Invoice Header -->
+        <div class="flex justify-between items-start border-b border-gray-100 pb-6">
+            <div>
+                <!-- Brand Logo Image -->
+                <img src="{% static 'img/logo/logodummy.png' %}" 
+                     alt="BookStore Logo" 
+                     class="w-24 md:w-28 h-auto object-contain mb-3">
+                <p class="text-xs text-gray-400">support@bookstore.com</p>
+            </div>
+            <div class="text-right">
+                <h1 class="text-xl md:text-2xl font-black text-gray-900 tracking-tight">TAX INVOICE</h1>
+                <p class="text-xs md:text-sm font-bold text-pink-600 mt-1">#ORD-{{ order.id }}</p>
+                <p class="text-xs text-gray-500 mt-0.5">Date: {{ order.created_at|date:"F j, Y" }}</p>
+            </div>
+        </div>
+
+        <!-- Shipping & Billing Details -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6 border-b border-gray-100 text-sm">
+            <div>
+                <h3 class="font-bold text-gray-400 uppercase text-[11px] tracking-wider mb-2">Billed & Shipped To:</h3>
+                <p class="font-bold text-gray-900">{{ order.address.full_name }}</p>
+                <p class="text-gray-600 mt-0.5">{{ order.address.address }}</p>
+                <p class="text-gray-600">{{ order.address.city }} - {{ order.address.pincode }}</p>
+                <p class="text-gray-600 mt-1 font-medium"><i class="fa-solid fa-phone text-xs text-gray-400 mr-1"></i> {{ order.address.phone }}</p>
+            </div>
+            <div class="sm:text-right flex flex-col sm:items-end justify-start">
+                <h3 class="font-bold text-gray-400 uppercase text-[11px] tracking-wider mb-2">Payment & Delivery Status:</h3>
+                
+                <div class="flex flex-wrap sm:justify-end gap-2 items-center">
+                    <!-- Payment Status Badge -->
+                    {% if order.payment_status == 'Paid' or order.payment_status == order.PaymentStatus.PAID %}
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-full border border-emerald-200">
+                            <i class="fa-solid fa-circle-check text-[11px] text-emerald-500"></i>
+                            <span>Paid</span>
+                        </span>
+                    {% else %}
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-700 text-xs font-bold rounded-full border border-amber-200">
+                            <i class="fa-solid fa-clock text-[11px] text-amber-500"></i>
+                            <span>{{ order.payment_status|default:"Unpaid" }}</span>
+                        </span>
+                    {% endif %}
+
+                    <!-- Order Delivery Status Badge -->
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-50 text-gray-700 text-xs font-bold rounded-full border border-gray-200">
+                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
+                        {{ order.get_status_display }}
+                    </span>
+                </div>
+
+                <p class="text-xs text-gray-500 mt-2">
+                    Payment Method: 
+                    <span class="font-medium text-gray-700">Online / Card / UPI</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Items Table -->
+        <div class="overflow-x-auto my-6">
+            <table class="w-full text-left border-collapse text-sm">
+                <thead>
+                    <tr class="border-b border-gray-200 bg-gray-50/80 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                        <th class="py-3 px-3">Item Description</th>
+                        <th class="py-3 px-3 text-center">Qty</th>
+                        <th class="py-3 px-3 text-right">Unit Price</th>
+                        <th class="py-3 px-3 text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    {% for item in items %}
+                    <tr>
+                        <td class="py-3.5 px-3">
+                            <span class="font-semibold text-gray-900 block">{{ item.book.title }}</span>
+                            {% if item.book.author %}
+                                <span class="text-xs text-gray-400">Author: {{ item.book.author }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-3.5 px-3 text-center font-medium text-gray-600">{{ item.quantity }}</td>
+                        <td class="py-3.5 px-3 text-right text-gray-600">₹{{ item.price }}</td>
+                        <td class="py-3.5 px-3 text-right font-bold text-gray-900">₹{% widthratio item.price 1 item.quantity %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Total Calculation -->
+        <div class="border-t border-gray-100 pt-4 flex justify-end">
+            <div class="w-full sm:w-64 space-y-2 text-sm">
+                <div class="flex justify-between text-gray-500 text-xs">
+                    <span>Shipping Charges:</span>
+                    <span class="text-emerald-600 font-semibold uppercase">Free</span>
+                </div>
+                <div class="flex justify-between font-bold text-base text-gray-900 border-t border-gray-200 pt-2.5">
+                    <span>Grand Total:</span>
+                    <span class="text-pink-600">₹{{ order.total }}</span>
+                </div>
+                <div class="flex justify-between items-center text-xs text-gray-500 bg-gray-50 px-3 py-2 rounded-lg border border-gray-100 mt-2">
+                    <span>Payment Status:</span>
+                    {% if order.payment_status == 'Paid' or order.payment_status == order.PaymentStatus.PAID %}
+                        <span class="font-bold text-emerald-600 uppercase tracking-wider">Completed</span>
+                    {% else %}
+                        <span class="font-bold text-amber-600 uppercase tracking-wider">Pending</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-xs text-gray-400 mt-12 border-t border-gray-100 pt-5 space-y-1">
+            <p class="font-medium text-gray-500">Thank you for shopping with BookStore!</p>
+            <p>For queries or support, contact us at support@bookstore.com</p>
+        </div>
+    </div>
+</body>
+</html>

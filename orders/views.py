@@ -12,8 +12,7 @@ def checkoutViews(request):
 
     if not cart.items.exists():
         messages.warning(request, "Your cart is empty.")
-        return redirect("cart:cart_detail")
-
+        return redirect("cart:cart")  
     if request.method == "POST":
         with transaction.atomic():
             address = Address.objects.create(
@@ -57,3 +56,13 @@ def checkoutViews(request):
 def orderSuccessViews(request):
     order = Order.objects.filter(user=request.user).order_by("-created_at").first()
     return render(request, "orders/order-success.html", {"order": order})
+
+@login_required(login_url="login")
+def download_invoice(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    
+    context = {
+        'order': order,
+        'items': order.items.all(),
+    }
+    return render(request, "orders/invoice.html", context)

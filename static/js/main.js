@@ -1,26 +1,37 @@
-const menuToggle = document.getElementById('menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
-const menuIcon = document.getElementById('menu-icon');
-const menuOverlay = document.getElementById('menu-overlay');
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
 
-function toggleMenu() {
-    mobileMenu.classList.toggle('translate-x-full');
-    if (mobileMenu.classList.contains('translate-x-full')) {
-        menuOverlay.classList.add('opacity-0');
-        setTimeout(() => menuOverlay.classList.add('hidden'), 300);
-        menuIcon.classList.remove('fa-xmark', 'rotate-90');
-        menuIcon.classList.add('fa-bars');
-    } else {
+    if (!menuToggle || !mobileMenu || !menuOverlay) return;
+
+    function openMenu() {
         menuOverlay.classList.remove('hidden');
-        setTimeout(() => menuOverlay.classList.remove('opacity-0'), 10);
-        menuIcon.classList.remove('fa-bars');
-        menuIcon.classList.add('fa-xmark', 'rotate-90');
+        requestAnimationFrame(() => {
+            menuOverlay.classList.remove('opacity-0');
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        document.documentElement.classList.add('overflow-hidden');
     }
-}
 
-menuToggle.addEventListener('click', toggleMenu);
-menuOverlay.addEventListener('click', toggleMenu);
+    function closeMenu() {
+        mobileMenu.classList.add('translate-x-full');
+        menuOverlay.classList.add('opacity-0');
+        setTimeout(() => {
+            menuOverlay.classList.add('hidden');
+        }, 300);
+        document.documentElement.classList.remove('overflow-hidden');
+    }
 
+    menuToggle.addEventListener('click', openMenu);
+    if (menuClose) menuClose.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+});
 
 // category-slider
 

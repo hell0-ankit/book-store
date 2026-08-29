@@ -3,12 +3,13 @@
 {% block title %}Customer Dashboard{% endblock %}
 
 {% block content %}
-<section class="w-full max-w-7xl mx-auto px-4 py-6">
-  <div class="flex bg-[var(--bg-card)] rounded-xl overflow-hidden border border-gray-100 shadow-sm min-h-[calc(100vh-120px)]">
+<section class="w-full max-w-7xl mx-auto px-2 sm:px-4 py-4 md:py-6">
+  <div class="flex flex-col md:flex-row bg-[var(--bg-card)] rounded-2xl overflow-hidden border border-gray-100 shadow-sm min-h-[calc(100vh-140px)]">
 
+    <!-- DESKTOP SIDEBAR (Visible on md and above) -->
     <aside class="hidden md:flex flex-col w-64 bg-[var(--bg-card)] border-r border-gray-200 shrink-0">
         <div class="h-16 flex items-center px-6 border-b border-gray-100">
-            <a href="#" class="text-xl font-bold flex items-center gap-2 text-[var(--text-heading)]">
+            <a href="{% url 'home' %}" class="text-xl font-bold flex items-center gap-2 text-[var(--text-heading)]">
                 <span class="w-8 h-8 rounded-lg bg-[var(--pink)] flex items-center justify-center text-white">
                     <i class="fas fa-book-open text-sm"></i>
                 </span>
@@ -47,30 +48,71 @@
         </div>
     </aside>
 
-    <div class="min-w-0 w-full overflow-hidden">
-        <header class="h-16 bg-[var(--bg-card)] border-b border-gray-200 flex items-center justify-between px-4 md:px-6 w-full">
-    <h2 class="text-base md:text-lg font-bold text-[var(--text-heading)] truncate">
-        Welcome back, {{ user.first_name|default:user.username }}!
-    </h2>
-    <div class="flex items-center gap-2 p-1 rounded-xl group">
-        {% if user.is_authenticated and user.profile.cover_image %}
-            <img src="{{ user.profile.cover_image.url }}" alt="Avatar"
-                 class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)] group-hover:ring-[var(--pink)] transition-all">
-        {% elif user.is_authenticated and user.profile.profile_image %}
-            <img src="{{ user.profile.profile_image.url }}" alt="Avatar"
-                 class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)] group-hover:ring-[var(--pink)] transition-all">
-        {% else %}
-            <!-- Default Avatar Fallback -->
-            <div class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-[var(--pink-light)] text-[var(--pink)] flex items-center justify-center font-bold text-sm">
-                {{ user.first_name|default:user.username|slice:":1"|upper }}
-            </div>
-        {% endif %}
-    </div>
-</header>
+    <!-- MAIN WRAPPER (Mobile + Desktop) -->
+    <div class="min-w-0 w-full flex flex-col flex-1 overflow-hidden">
+        
+        <!-- DASHBOARD TOP HEADER -->
+        <header class="h-16 bg-[var(--bg-card)] border-b border-gray-100 flex items-center justify-between px-4 md:px-6 w-full shrink-0">
+            <h2 class="text-sm sm:text-base md:text-lg font-bold text-[var(--text-heading)] truncate">
+                Welcome back, {{ user.first_name|default:user.username }}!
+            </h2>
+            
+            <div class="flex items-center gap-2 md:gap-3">
+                <!-- Mobile Only Logout Icon -->
+                <a href="{% url 'logout' %}" 
+                   class="md:hidden w-8 h-8 flex items-center justify-center rounded-lg text-red-500 hover:bg-red-50 transition-colors"
+                   title="Logout">
+                    <i class="fas fa-sign-out-alt text-sm"></i>
+                </a>
 
-        <main class="flex-1 overflow-y-auto p-4 md:p-6">
+                <!-- User Profile / Avatar -->
+                <div class="flex items-center gap-2">
+                    {% if user.is_authenticated and user.profile.cover_image %}
+                        <img src="{{ user.profile.cover_image.url }}" alt="Avatar"
+                             class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)]">
+                    {% elif user.is_authenticated and user.profile.profile_image %}
+                        <img src="{{ user.profile.profile_image.url }}" alt="Avatar"
+                             class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover ring-2 ring-[var(--pink-light)]">
+                    {% else %}
+                        <div class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-[var(--pink-light)] text-[var(--pink)] flex items-center justify-center font-bold text-xs md:text-sm">
+                            {{ user.first_name|default:user.username|slice:":1"|upper }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <!-- MOBILE NAVIGATION TABS (Visible only on mobile screen) -->
+        <div class="md:hidden bg-white border-b border-gray-100 px-3 py-2 overflow-x-auto no-scrollbar shrink-0">
+            <nav class="flex items-center gap-2 min-w-max">
+                <a href="{% url 'customer_dashboard' %}"
+                   class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all
+                   {% if request.resolver_match.url_name == 'customer_dashboard' %}bg-[var(--pink-light)] text-[var(--pink)]{% else %}text-[var(--text-body)] hover:bg-gray-50{% endif %}">
+                    <i class="fas fa-th-large text-xs"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="{% url 'cm_orders_history' %}"
+                   class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all
+                   {% if request.resolver_match.url_name == 'cm_orders_history' %}bg-[var(--pink-light)] text-[var(--pink)]{% else %}text-[var(--text-body)] hover:bg-gray-50{% endif %}">
+                    <i class="fas fa-shopping-bag text-xs"></i>
+                    <span>Orders</span>
+                </a>
+
+                <a href="{% url 'cm_personal_details' %}"
+                   class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all
+                   {% if request.resolver_match.url_name == 'cm_personal_details' or request.resolver_match.url_name == 'cm_update_personaldetail' %}bg-[var(--pink-light)] text-[var(--pink)]{% else %}text-[var(--text-body)] hover:bg-gray-50{% endif %}">
+                    <i class="fas fa-user text-xs"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6">
             {% block contentbase %}
-            <div class="border-4 border-dashed border-gray-300 rounded-2xl h-full flex items-center justify-center text-[var(--text-body)]">
+            <div class="border-2 border-dashed border-gray-200 rounded-xl min-h-[300px] flex items-center justify-center text-[var(--text-body)]">
+                <p class="text-sm">Content Area</p>
             </div>
             {% endblock %}
         </main>

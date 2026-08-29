@@ -1,8 +1,42 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %} 404 || Page Not Found{% endblock %}
+
+{% block title %}404 - Page Not Found | SonuBookStore{% endblock %}
 
 {% block content %}
+<section class="min-h-[70vh] flex items-center justify-center px-4 py-12">
+    <div class="max-w-md w-full text-center space-y-6">
+        <!-- 404 Illustration / Icon -->
+        <div class="relative mx-auto w-32 h-32 flex items-center justify-center">
+            <div class="absolute inset-0 bg-[var(--pink-light)] rounded-full animate-pulse opacity-70"></div>
+            <div class="relative z-10 w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center border border-pink-100">
+                <i class="fa-solid fa-book-skull text-4xl text-[var(--pink)]"></i>
+            </div>
+        </div>
 
+        <!-- Heading & Details -->
+        <div class="space-y-2">
+            <h1 class="text-6xl font-extrabold text-[var(--text-heading)] tracking-tight">404</h1>
+            <h2 class="text-xl font-bold text-[var(--text-heading)]">Oops! Page Not Found</h2>
+            <p class="text-sm text-[var(--text-body)] leading-relaxed">
+                The book or page you are looking for seems to have been removed, had its name changed, or is temporarily unavailable.
+            </p>
+        </div>
 
+        <!-- Quick Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <a href="{% url 'home' %}" 
+               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[var(--pink)] text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shadow-sm">
+                <i class="fa-solid fa-house text-xs"></i>
+                <span>Back to Home</span>
+            </a>
+            
+            <a href="{% url 'product-listing' %}" 
+               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-[var(--text-heading)] border border-gray-200 px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-50 transition-all">
+                <i class="fa-solid fa-bag-shopping text-xs"></i>
+                <span>Browse Store</span>
+            </a>
+        </div>
+    </div>
+</section>
 {% endblock %}

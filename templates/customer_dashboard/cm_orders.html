@@ -3,6 +3,7 @@
 
 {% block contentbase %}
 <div class="space-y-6">
+    <!-- Stat Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div class="bg-white p-4 rounded-xl border border-gray-200/80 shadow-sm flex items-center justify-between">
             <div>
@@ -35,6 +36,7 @@
         </div>
     </div>
 
+    <!-- Orders History Table -->
     <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
         <div class="p-4 md:p-5 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white">
             <div>
@@ -51,6 +53,7 @@
                         <th class="py-3 px-5">Book Details</th>
                         <th class="py-3 px-5">Price</th>
                         <th class="py-3 px-5">Status</th>
+                        <th class="py-3 px-5 text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-sm">
@@ -63,7 +66,6 @@
                         <td class="py-4 px-5">
                             {% with first_item=order.items.first %}
                             <div class="flex items-center gap-3">
-                                <!-- Product Cover Image with Fallback -->
                                 <div class="w-12 h-16 bg-gray-100 rounded-lg border border-gray-200 shrink-0 overflow-hidden flex items-center justify-center shadow-xs">
                                     {% if first_item.book.cover_image %}
                                         <img 
@@ -98,9 +100,23 @@
                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-500"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> {{ order.get_status_display }}</span>
                             {% endif %}
                         </td>
+                        <td class="py-4 px-5 text-center">
+                            {% if order.payment_status == "Paid" or order.payment_status == order.PaymentStatus.PAID %}
+                                <a href="{% url 'orders:download_invoice' order.id %}" 
+                                   target="_blank"
+                                   class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--pink-light)] text-[var(--pink)] hover:bg-[var(--pink)] hover:text-white transition-all shadow-xs">
+                                    <i class="fas fa-file-invoice text-xs"></i>
+                                    <span>Invoice</span>
+                                </a>
+                            {% else %}
+                                <span class="inline-flex items-center text-xs font-medium text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md">
+                                    Unpaid
+                                </span>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% empty %}
-                    <tr><td colspan="4" class="py-6 text-center text-sm text-gray-400">Abhi koi order nahi hai.</td></tr>
+                    <tr><td colspan="5" class="py-6 text-center text-sm text-gray-400">Abhi koi order nahi hai.</td></tr>
                     {% endfor %}
                 </tbody>
             </table>
