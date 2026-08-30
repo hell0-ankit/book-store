@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from product.filters import get_latest_books, get_top_discount_books, get_top_authors
+from django.contrib import messages
+from .models import NewsletterSubscriber
 
 # Create your views here.
 def homeView(request):
@@ -14,3 +16,19 @@ def homeView(request):
 
 def aboutView(request):
     return render(request, 'core/about-us.html')
+
+def subscribe_newsletter(request):
+    if request.method == "POST":
+        email = request.POST.get("email", "").strip().lower()
+        
+        if email:
+            _, created = NewsletterSubscriber.objects.get_or_create(email=email)
+            if created:
+                messages.success(request, "Thank you for subscribing to our newsletter!")
+            else:
+                messages.info(request, "You are already subscribed.")
+        else:
+            messages.error(request, "Please enter a valid email.")
+
+    # Redirect back to the page the user submitted from
+    return redirect(request.META.get('HTTP_REFERER', '/'))

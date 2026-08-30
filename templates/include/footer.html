@@ -52,9 +52,11 @@
             <p class="text-[14px] text-[var(--text-body)] leading-snug">
                 Subscribe to get special offers, free giveaways, and updates.
             </p>
-            <form action="#" method="POST" class="relative w-full flex items-center mt-2">
+            <form action="{% url 'subscribe_newsletter' %}" method="POST" class="relative w-full flex items-center mt-2">
+                {% csrf_token %}
                 <input 
                     type="email" 
+                    name="email"
                     placeholder="Your email address" 
                     class="w-full bg-neutral-800 text-white text-[13px] pl-4 pr-12 py-3 rounded-full border border-neutral-700 outline-none focus:border-[var(--pink)] transition-all duration-300"
                     required
