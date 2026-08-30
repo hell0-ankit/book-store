@@ -1,0 +1,374 @@
+{% load static %}
+<!-- ================= STANDALONE FLOATING CHAT POPUP WIDGET ================= -->
+
+<!-- 1. Floating Circular Trigger Button -->
+<div id="chat-widget-root" style="position: fixed; bottom: 24px; right: 24px; z-index: 999999; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+
+    <button id="chat-toggle-btn"
+            type="button"
+            onclick="toggleChatBox()"
+            style="
+                width: 58px;
+                height: 58px;
+                border-radius: 50%;
+                background-color: #ec4899;
+                color: #ffffff;
+                border: none;
+                box-shadow: 0 8px 24px rgba(236, 72, 153, 0.45);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                position: relative;
+                outline: none;
+                transition: transform 0.2s ease, background-color 0.2s ease;
+            "
+            onmouseover="this.style.transform='scale(1.05)'"
+            onmouseout="this.style.transform='scale(1)'">
+
+        <!-- Open Icon (SVG fallback if FontAwesome fails) -->
+        <span id="chat-icon-open" style="display: flex; align-items: center; justify-content: center;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </span>
+
+        <!-- Close Icon -->
+        <span id="chat-icon-close" style="display: none; align-items: center; justify-content: center;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </span>
+
+        <!-- Unread Badge -->
+        <span id="chat-unread-badge" 
+              style="
+                  display: none;
+                  position: absolute;
+                  top: -2px;
+                  right: -2px;
+                  background-color: #ef4444;
+                  color: #ffffff;
+                  font-size: 11px;
+                  font-weight: bold;
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  border: 2px solid #ffffff;
+                  align-items: center;
+                  justify-content: center;
+                  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+              ">0</span>
+    </button>
+
+    <!-- 2. Chat Window Box -->
+    <div id="chat-box-wrapper"
+         style="
+             display: none;
+             position: fixed;
+             bottom: 95px;
+             right: 24px;
+             width: 360px;
+             max-width: calc(100vw - 32px);
+             height: 520px;
+             max-height: calc(100vh - 120px);
+             background-color: #ffffff;
+             border-radius: 16px;
+             box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+             border: 1px solid #f1f5f9;
+             flex-direction: column;
+             overflow: hidden;
+             z-index: 999999;
+         ">
+
+        <!-- Header -->
+        <div style="background-color: #ec4899; color: #ffffff; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
+                        <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 style="margin: 0; font-size: 14px; font-weight: 700; line-height: 1.2;">Customer Support</h3>
+                    <p style="margin: 2px 0 0 0; font-size: 11px; opacity: 0.9; display: flex; align-items: center; gap: 5px;">
+                        <span style="width: 7px; height: 7px; border-radius: 50%; background-color: #10b981; display: inline-block;"></span> Online
+                    </p>
+                </div>
+            </div>
+            <button type="button" onclick="toggleChatBox()" style="background: none; border: none; color: #ffffff; font-size: 22px; cursor: pointer; padding: 0 4px; line-height: 1;">&times;</button>
+        </div>
+
+        {% if user.is_authenticated %}
+            <!-- Chat Conversation History -->
+            <div id="chat-conversation-area" style="flex: 1; padding: 14px; overflow-y: auto; background-color: #fdf2f8; display: flex; flex-direction: column; gap: 10px;">
+                <div id="chat-loading-spinner" style="margin: auto; text-align: center; color: #9ca3af; font-size: 12px;">
+                    <div style="display: inline-block; width: 22px; height: 22px; border: 3px solid #f3f4f6; border-top-color: #ec4899; border-radius: 50%; animation: chatSpin 0.8s linear infinite; margin-bottom: 6px;"></div>
+                    <div>Loading messages...</div>
+                </div>
+            </div>
+
+            <!-- Message Form Input -->
+            <form id="popup-chat-form" style="display: flex; padding: 10px 12px; background-color: #ffffff; border-top: 1px solid #f1f5f9; gap: 8px; flex-shrink: 0; margin: 0;">
+                {% csrf_token %}
+                <input type="text"
+                       name="message"
+                       id="popup-msg-input"
+                       placeholder="Type your question..."
+                       required
+                       autocomplete="off"
+                       style="
+                           flex: 1;
+                           padding: 9px 14px;
+                           border-radius: 20px;
+                           border: 1px solid #e2e8f0;
+                           font-size: 13px;
+                           color: #1e293b;
+                           background-color: #f8fafc;
+                           outline: none;
+                       ">
+                <button type="submit"
+                        id="popup-send-btn"
+                        style="
+                            background-color: #ec4899;
+                            color: #ffffff;
+                            border: none;
+                            width: 36px;
+                            height: 36px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            flex-shrink: 0;
+                        ">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </form>
+        {% else %}
+            <!-- Non-Authenticated State -->
+            <div style="flex: 1; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background-color: #fafafa;">
+                <div style="width: 52px; height: 52px; background-color: #fce7f3; color: #ec4899; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <h4 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">Login to Start Chat</h4>
+                <p style="margin: 6px 0 18px 0; font-size: 12px; color: #64748b; line-height: 1.4;">
+                    Please log in to chat with our live customer support team.
+                </p>
+                <a href="{% url 'login' %}?next={{ request.path }}"
+                   style="
+                       display: block;
+                       width: 80%;
+                       background-color: #ec4899;
+                       color: #ffffff;
+                       padding: 10px 16px;
+                       border-radius: 10px;
+                       text-decoration: none;
+                       font-size: 13px;
+                       font-weight: 600;
+                   ">Login / Sign In</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+@keyframes chatSpin {
+    to { transform: rotate(360deg); }
+}
+.chat-msg-row {
+    display: flex;
+    width: 100%;
+}
+.chat-msg-row.me {
+    justify-content: flex-end;
+}
+.chat-msg-row.support {
+    justify-content: flex-start;
+}
+.chat-msg-bubble {
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+.chat-msg-row.me .chat-msg-bubble {
+    background-color: #ec4899;
+    color: #ffffff;
+    border-bottom-right-radius: 2px;
+}
+.chat-msg-row.support .chat-msg-bubble {
+    background-color: #ffffff;
+    color: #1e293b;
+    border: 1px solid #e2e8f0;
+    border-bottom-left-radius: 2px;
+}
+</style>
+
+<script>
+let isChatOpen = false;
+let chatPollTimer = null;
+let lastMsgCount = 0;
+let unreadCounter = 0;
+
+function playPing() {
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.35);
+    } catch(e) {}
+}
+
+function updateBadgeUI(count) {
+    const badge = document.getElementById('chat-unread-badge');
+    if (!badge) return;
+    if (count > 0) {
+        badge.textContent = count > 9 ? '9+' : count;
+        badge.style.display = 'flex';
+    } else {
+        badge.style.display = 'none';
+        badge.textContent = '0';
+    }
+}
+
+function toggleChatBox() {
+    const box = document.getElementById('chat-box-wrapper');
+    const iconOpen = document.getElementById('chat-icon-open');
+    const iconClose = document.getElementById('chat-icon-close');
+
+    isChatOpen = !isChatOpen;
+
+    if (isChatOpen) {
+        box.style.display = 'flex';
+        iconOpen.style.display = 'none';
+        iconClose.style.display = 'flex';
+
+        unreadCounter = 0;
+        updateBadgeUI(0);
+
+        {% if user.is_authenticated %}
+            loadMessages();
+        {% endif %}
+    } else {
+        box.style.display = 'none';
+        iconOpen.style.display = 'flex';
+        iconClose.style.display = 'none';
+    }
+}
+
+{% if user.is_authenticated %}
+const msgContainer = document.getElementById('chat-conversation-area');
+const chatFormEl = document.getElementById('popup-chat-form');
+const msgInputEl = document.getElementById('popup-msg-input');
+const sendBtnEl = document.getElementById('popup-send-btn');
+
+function escapeString(str) {
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+}
+
+function loadMessages() {
+    fetch("{% url 'chat:get_messages' %}?_t=" + new Date().getTime(), { cache: 'no-store' })
+        .then(res => {
+            if (!res.ok) throw new Error('Network error');
+            return res.json();
+        })
+        .then(data => {
+            const msgs = data.messages || [];
+
+            if (msgs.length > lastMsgCount) {
+                const latest = msgs[msgs.length - 1];
+                if (!latest.is_me && lastMsgCount !== 0) {
+                    playPing();
+                    if (!isChatOpen) {
+                        unreadCounter += (msgs.length - lastMsgCount);
+                        updateBadgeUI(unreadCounter);
+                    }
+                }
+                lastMsgCount = msgs.length;
+            }
+
+            if (!isChatOpen) return;
+
+            if (msgs.length === 0) {
+                msgContainer.innerHTML = `
+                    <div style="margin: auto; text-align: center; color: #94a3b8; font-size: 12px;">
+                        <p style="margin: 0; font-weight: 600;">Hello {{ request.user.username }}!</p>
+                        <p style="margin: 4px 0 0 0; font-size: 11px;">How can we help you today?</p>
+                    </div>
+                `;
+                return;
+            }
+
+            msgContainer.innerHTML = '';
+            msgs.forEach(m => {
+                const isMe = m.is_me;
+                const row = document.createElement('div');
+                row.className = `chat-msg-row ${isMe ? 'me' : 'support'}`;
+                row.innerHTML = `
+                    <div class="chat-msg-bubble">
+                        <div>${escapeString(m.message)}</div>
+                        <div style="font-size: 9px; opacity: 0.7; text-align: right; margin-top: 3px;">${escapeString(m.timestamp)}</div>
+                    </div>
+                `;
+                msgContainer.appendChild(row);
+            });
+            msgContainer.scrollTop = msgContainer.scrollHeight;
+        })
+        .catch(err => console.error("Chat load error:", err));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadMessages();
+    chatPollTimer = setInterval(loadMessages, 2500);
+});
+
+chatFormEl.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const text = msgInputEl.value.trim();
+    if (!text) return;
+
+    const formData = new FormData(chatFormEl);
+    sendBtnEl.disabled = true;
+
+    fetch("{% url 'chat:send_message' %}", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => {
+        if (!res.ok) throw new Error('Send failed');
+        return res.json();
+    })
+    .then(() => {
+        msgInputEl.value = '';
+        loadMessages();
+    })
+    .catch(err => {
+        console.error("Send error:", err);
+        alert("Failed to send message. Please try again.");
+    })
+    .finally(() => {
+        sendBtnEl.disabled = false;
+    });
+});
+{% endif %}
+</script>

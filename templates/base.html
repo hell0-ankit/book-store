@@ -34,9 +34,16 @@
         
 
         {% block content %} 
-        
+    
         
         {% endblock  %}
+
+        {% block chat %}
+
+        <!-- Floating Chat Widget -->
+        {% include "chat/chat_widget.html" %}
+    
+        {% endblock chat %}
 
 
         {% block footer %}  {% include "include/footer.html" %} {% endblock footer %}
