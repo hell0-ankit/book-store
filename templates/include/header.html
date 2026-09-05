@@ -20,9 +20,9 @@
         <!-- LEFT: Logo -->
         <div class="zoom-in logo flex-shrink-0">
             <a href="{% url 'home' %}" class="block">
-                <img src="{% static 'img/logo/logodummy.png' %}"
+                <img src="{% static 'img/logo/logo.png' %}"
                      alt="Logo"
-                     class="w-[70px] md:w-[80px] h-auto object-contain">
+                     class="w-[120px] md:w-[200px] h-auto object-contain">
             </a>
         </div>
 
@@ -32,8 +32,7 @@
                 <li><a href="{% url 'home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}text-[var(--pink)]{% endif %} hover:text-[var(--pink)]">Home</a></li>
                 <li><a href="{% url 'about-us' %}" class="nav-link {% if request.resolver_match.url_name == 'about-us' %}text-[var(--pink)]{% endif %} tracking-widest inline-block es-out hover:text-[var(--pink)]">About Us</a></li>
                 <li><a href="{% url 'product-listing' %}" class="nav-link {% if request.resolver_match.url_name == 'product-listing' %}text-[var(--pink)]{% endif %} tracking-widest inline-block es-out hover:text-[var(--pink)]">Shop</a></li>
-                <li><a href="#" class="nav-link tracking-widest inline-block es-out hover:text-[var(--pink)]">Collection</a></li>
-                <li><a href="#" class="nav-link tracking-widest inline-block hover:text-[var(--pink)] es-out">Contact Us</a></li>
+                <li><a href="{% url 'contact'  %}" class="nav-link tracking-widest inline-block hover:text-[var(--pink)] es-out">Contact Us</a></li>
             </ul>
         </div>
 
@@ -124,13 +123,9 @@
                 Shop
             </a>
         </li>
+        
         <li>
-            <a href="#" class="block py-1 text-gray-800 hover:text-[var(--pink)] transition-colors">
-                Collection
-            </a>
-        </li>
-        <li>
-            <a href="#" class="block py-1 text-gray-800 hover:text-[var(--pink)] transition-colors">
+            <a href="{% url 'contact'  %}" class="block py-1 text-gray-800 hover:text-[var(--pink)] transition-colors">
                 Contact Us
             </a>
         </li>

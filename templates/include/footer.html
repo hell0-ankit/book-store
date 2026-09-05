@@ -5,44 +5,49 @@
         <!-- Column 1: Brand Info & Socials -->
         <div class="lg:col-span-2 flex flex-col gap-5">
             <div class="logo">
-                <a href="#">
-                    
-                    <img src="{% static 'img/logo/logodummy.png' %}" alt="Footer Logo" class="w-[90px] h-auto object-contain ">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'img/logo/logo.png' %}" alt="Footer Logo" class="w-[200px] h-auto object-contain ">
                 </a>
             </div>
             <p class="text-[14px] text-gray-400 leading-relaxed max-w-[320px]">
-                Discover modern trends and timeless fashion tailored just for you. Quality products, seamless payments, and unmatched customer care.
+                Discover your next great read at Sonu Book Store. Explore inspiring stories, 
+                timeless classics, and bestselling books—all in one place. 
+                Enjoy quality books, easy ordering, and a seamless shopping experience.
             </p>
             <!-- Social Icons with your signature Hover Bounce -->
             <div class="flex items-center gap-4 text-[16px] text-white mt-2">
-                <a href="#" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#" class="footer-social"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#" class="footer-social"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/" target="blank" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/" class="footer-social" target="blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/" class="footer-social" target="blank"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
         </div>
 
-        <!-- Column 2: Quick Shop Links -->
+        <!-- Column 2: General Pages -->
         <div class="flex flex-col gap-4">
-            <h4 class="text-white text-[15px] font-[700] tracking-wider uppercase">Shop</h4>
+            <h4 class="text-white text-[15px] font-[700] tracking-wider uppercase">
+                Explore
+            </h4>
+
             <ul class="flex flex-col gap-2.5 text-[14px] text-[var(--text-body)]">
-                <li><a href="#" class="footer-link">New Arrivals</a></li>
-                <li><a href="#" class="footer-link">Best Sellers</a></li>
-                <li><a href="#" class="footer-link">Summer Collection</a></li>
-                <li><a href="#" class="footer-link">Accessories</a></li>
-                <li><a href="#" class="footer-link">Offers & Sale</a></li>
+                <li><a href="{% url 'home'  %}" class="footer-link">Home</a></li>
+                <li><a href="{% url 'product-listing'  %}" class="footer-link">Shop</a></li>
+                <li><a href="{% url 'about-us'  %}" class="footer-link">About Us</a></li>
+                <li><a href="{% url 'contact'  %}" class="footer-link">Contact Us</a></li>
             </ul>
         </div>
 
-        <!-- Column 3: Customer Support Info -->
+
+        <!-- Column 3: Customer Pages -->
         <div class="flex flex-col gap-4">
-            <h4 class="text-white text-[15px] font-[700] tracking-wider uppercase">Support</h4>
+            <h4 class="text-white text-[15px] font-[700] tracking-wider uppercase">
+                Customer
+            </h4>
+
             <ul class="flex flex-col gap-2.5 text-[14px] text-[var(--text-body)]">
-                <li><a href="#" class="footer-link">Track Your Order</a></li>
-                <li><a href="#" class="footer-link">Shipping & Delivery</a></li>
-                <li><a href="#" class="footer-link">Returns & Refunds</a></li>
-                <li><a href="#" class="footer-link">FAQs & Help Center</a></li>
-                <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                <li><a href="{% url 'customer_dashboard' %}" class="footer-link">My Account</a></li>
+                <li><a href="{% url 'cm_personal_details' %}" class="footer-link">My Orders</a></li>
+                <li><a href="{% url 'faq'  %}" class="footer-link">FAQs</a></li>
+                <li><a href="{% url 'privacy_policy' %}" class="footer-link">Privacy Policy</a></li>
             </ul>
         </div>
 
@@ -77,7 +82,7 @@
     <div class="container-custom flex flex-col md:flex-row justify-between items-center gap-6">
         <!-- Copyright text -->
         <p class="text-[13px] text-[var(--text-body)] text-center md:text-left">
-            &copy; 2026 Sona Book Store. All rights reserved. Built with love.
+            &copy; 2026 Sonu Book Store. All rights reserved.
         </p>
         
         <!-- Modern SVG/Font-Awesome Powered Payment Trust Icons -->

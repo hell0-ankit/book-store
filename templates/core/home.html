@@ -1,6 +1,6 @@
 {% extends "base.html" %} 
 {% load static %}
-{% block title %}Home {% endblock%}
+{% block title %}Home | Sonu Book Store | Discover Your Next Story {% endblock%}
 
 {% block content %}
    
@@ -12,14 +12,13 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
       <!-- Left Column: Content -->
       <div class="slide-left space-y-6 text-center md:text-left">
-        <span class="inline-block text-xs font-semibold tracking-widest text-[var(--pink)] uppercase ">Welcome to Sona Book Store</span>
+        <span class="inline-block text-xs font-semibold tracking-widest text-[var(--pink)] uppercase ">WELCOME TO SONU BOOK STORE</span>
         <!-- Marcellus Font for Headings -->
         <h2 class="main-heading fade-up-heading ">Discover Your Next <br />
-          <span class="text-pink">Great Adventure</span>
+          <span class="text-pink">Great Read</span>
         </h2>
-        <!-- DM Sans Font for Body -->
         <p class="body-text text-[20px]">
-          Explore thousands of books from historical classics to modern-day thrillers. Manage your personal library, track your favorites, and dive into endless stories.
+          Explore thousands of books, from timeless classics to modern-day favorites. Find your next great read and discover stories that inspire, entertain, and stay with you.
         </p>
         <!-- Search Bar & Buttons -->
         <div class="pt-4 max-w-md mx-auto md:mx-0">
@@ -53,7 +52,7 @@
           
           <!-- Core Image Node -->
           <img 
-            src="{% static 'img/book.webp' %}" 
+            src="{% static 'img/herobook.png' %}" 
             alt="Featured Book Collection" 
             class="  w-full h-auto object-cover rounded-xl shadow-md transition-transform duration-500 group-hover:scale-[1.02]"
           >
@@ -187,11 +186,11 @@
       </a>
         <div class="flex flex-col flex-grow pt-2">
        
-            <h3  class="font-bold text-[18px] hover:text-[var(--pink)] transition-colors"> <a href="{% url 'product-detail' book.slug  %}"> {{book.title}}  </a></h3>
+            <h3  class="font-bold text-[18px] hover:text-[var(--pink)] transition-colors"> <a href="{% url 'product-detail' book.slug  %}"> {{book.title|truncatewords:3 }}  </a></h3>
     
           <div class="flex items-center gap-2 mb-4">
-            <span class="text-xs line-through text-gray-300 font-medium">{{book.price}}</span>
-            <span class="text-sm text-[var(--mint)]">{{book.discount_price}}</span>
+            <span class="text-xs line-through text-gray-300 font-medium"> ₹ {{book.price}}</span>
+            <span class="text-sm text-[var(--mint)]">₹  {{book.discount_price}}</span>
           </div>
           <a href="{% url 'cart:add_to_cart' book.id %}" class="w-full btn btn-primary text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded transition-colors mt-auto">
             Add To Cart
@@ -316,7 +315,7 @@
         </div>
       </a>
         <div class="flex flex-col flex-grow pt-2">
-          <h3  class="font-bold text-[18px] hover:text-[var(--pink)] transition-colors"><a href="{% url 'product-detail' book.slug  %}">{{book.title}}</a></h3>
+          <h3  class="font-bold text-[18px] hover:text-[var(--pink)] transition-colors"><a href="{% url 'product-detail' book.slug  %}">{{book.title|truncatewords:3 }}</a></h3>
           <div class="flex items-center gap-2 mb-4">
             <span class="text-xs line-through text-gray-300 font-medium">₹ {{book.price}}</span>
             <span class="text-sm text-[var(--mint)]">₹ {{book.discount_price}}</span>
@@ -343,20 +342,20 @@
 <section class="w-full bg-[var(--white)] py-16">
   <div class="w-full max-w-7xl mx-auto px-4">
 
-    <h2 class="main-heading text-center mb-10 tracking-tight text-3xl font-bold">
+    <h2 class="main-heading text-center mb-10 tracking-tight  font-bold">
       Top <span class="text-pink">Authors</span>
     </h2>
 
     <div class="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
       {% for author in top_authors %}
-        <a href="{% url 'product-listing' %}?author={{ author.slug }}" style="background-color: var(--bg-card);" class="author-card border border-gray-100 rounded-xl p-6 flex flex-col items-center justify-center text-center shadow-[0_2px_8px_rgba(0,0,0,0.02)] group cursor-pointer transition-all duration-300 hover:shadow-md ">
+        <a href="{% url 'product-listing' %}?author={{ author.slug }}"  class="author-card border border-gray-100 rounded-xl p-6 flex flex-col items-center justify-center text-center   cursor-pointer shadow-md ">
           
           <div class="w-20 h-20 sm:w-24 sm:h-24 mb-3 rounded-full overflow-hidden border-2 border-transparent group-hover:border-[var(--mint)] transition-all duration-300">
             {% if author.cover_image %}
               <img 
                 src="{{ author.cover_image.url }}" 
                 alt="{{ author.name }}" 
-                class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110"
+                class="w-full h-full object-cover duration-300 transform group-hover:scale-110"
               >
             {% else %}
               <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400 font-bold text-xl">

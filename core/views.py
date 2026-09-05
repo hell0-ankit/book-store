@@ -16,6 +16,13 @@ def homeView(request):
 
 def aboutView(request):
     return render(request, 'core/about-us.html')
+def privacyPolicy(request):
+    return render(request, 'core/privacy_policy.html')
+def faqView(request):
+    return render(request, 'core/faq.html')
+
+def contactViews(request):
+    return render(request, 'core/contact.html')
 
 def subscribe_newsletter(request):
     if request.method == "POST":

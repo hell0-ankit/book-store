@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Frequently Asked Questions - Sonu Book Store{% endblock %}
+
+{% block content %}
+<section style="background-color: var(--bg-main);" class="w-full py-16 sm:py-20 px-4 overflow-hidden relative">
+  <div style="background-color: var(--pink-light);" class="absolute -right-20 -top-20 w-80 h-80 rounded-full blur-3xl opacity-30 pointer-events-none"></div>
+  <div style="background-color: var(--pink-light);" class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"></div>
+
+  <div class="w-full max-w-4xl mx-auto relative z-10 text-center">
+    <span style="color: var(--mint);" class="text-xs sm:text-sm font-black tracking-[0.2em] uppercase mb-3 block">
+      Got Questions?
+    </span>
+    <h1 class="main-heading mb-4 font-black font-serif tracking-tight leading-tight">
+      Frequently Asked <span class="text-pink">Questions</span>
+    </h1>
+    <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed max-w-2xl mx-auto opacity-80">
+      Find quick answers regarding our books, order processing, delivery timelines, and return policies.
+    </p>
+  </div>
+</section>
+
+<section class="w-full bg-[var(--white)] py-16 px-4">
+  <div class="w-full max-w-4xl mx-auto space-y-5">
+
+    <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-2xl p-6 sm:p-7 shadow-sm">
+      <h3 style="color: var(--text-heading);" class="font-bold text-base sm:text-lg mb-2 flex items-center gap-2">
+        <i style="color: var(--mint);" class="fa-solid fa-circle-question text-base"></i>
+        Are all the books sold on Sonu Book Store genuine?
+      </h3>
+      <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed opacity-80 pl-6">
+        Yes, 100%. We source all our books directly from certified publishers and authorized distributors, ensuring authentic print quality and editions.
+      </p>
+    </div>
+
+    <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-2xl p-6 sm:p-7 shadow-sm">
+      <h3 style="color: var(--text-heading);" class="font-bold text-base sm:text-lg mb-2 flex items-center gap-2">
+        <i style="color: var(--pink);" class="fa-solid fa-truck-fast text-base"></i>
+        How long does shipping and delivery take?
+      </h3>
+      <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed opacity-80 pl-6">
+        Orders are dispatched within 24 to 48 hours. Delivery usually takes 3–5 business days depending on your location, with tracking numbers shared via SMS and email.
+      </p>
+    </div>
+
+    <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-2xl p-6 sm:p-7 shadow-sm">
+      <h3 style="color: var(--text-heading);" class="font-bold text-base sm:text-lg mb-2 flex items-center gap-2">
+        <i style="color: var(--mint);" class="fa-solid fa-box-archive text-base"></i>
+        How are the books packaged to prevent damage?
+      </h3>
+      <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed opacity-80 pl-6">
+        We use multi-layer protective packaging, including bubble wrap and waterproof outer mailers, ensuring your books arrive in mint condition.
+      </p>
+    </div>
+
+    <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-2xl p-6 sm:p-7 shadow-sm">
+      <h3 style="color: var(--text-heading);" class="font-bold text-base sm:text-lg mb-2 flex items-center gap-2">
+        <i style="color: var(--pink);" class="fa-solid fa-rotate-left text-base"></i>
+        What is your return or replacement policy?
+      </h3>
+      <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed opacity-80 pl-6">
+        If you receive a damaged book or the wrong edition, contact our support within 7 days of delivery. We will initiate a replacement or refund immediately.
+      </p>
+    </div>
+
+    <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-2xl p-6 sm:p-7 shadow-sm">
+      <h3 style="color: var(--text-heading);" class="font-bold text-base sm:text-lg mb-2 flex items-center gap-2">
+        <i style="color: var(--mint);" class="fa-solid fa-credit-card text-base"></i>
+        Which payment methods are accepted?
+      </h3>
+      <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed opacity-80 pl-6">
+        We support all major payment options, including UPI (Google Pay, PhonePe, Paytm), Debit/Credit Cards, Net Banking, and Cash on Delivery (COD) on eligible pin codes.
+      </p>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

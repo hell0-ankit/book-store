@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Privacy Policy - Sonu Book Store{% endblock %}
+
+{% block content %}
+<section style="background-color: var(--bg-main);" class="w-full py-16 sm:py-20 px-4 overflow-hidden relative">
+  <div style="background-color: var(--pink-light);" class="absolute -right-20 -top-20 w-80 h-80 rounded-full blur-3xl opacity-30 pointer-events-none"></div>
+  <div style="background-color: var(--pink-light);" class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"></div>
+
+  <div class="w-full max-w-4xl mx-auto relative z-10 text-center">
+    <span style="color: var(--mint);" class="text-xs sm:text-sm font-black tracking-[0.2em] uppercase mb-3 block">
+      Transparency & Trust
+    </span>
+    <h1 class="main-heading mb-4 font-black font-serif tracking-tight leading-tight">
+      Privacy <span class="text-pink">Policy</span>
+    </h1>
+    <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed max-w-2xl mx-auto opacity-80">
+      At Sonu Book Store, we value your trust and are committed to protecting your personal information.
+    </p>
+  </div>
+</section>
+
+<section class="w-full bg-[var(--white)] py-16 px-4">
+  <div class="w-full max-w-4xl mx-auto space-y-8">
+
+    <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div style="color: var(--mint); background-color: var(--bg-main);" class="w-10 h-10 rounded-lg flex items-center justify-center text-lg">
+          <i class="fa-solid fa-database"></i>
+        </div>
+        <h2 style="color: var(--text-heading);" class="text-xl font-bold font-serif">1. Information We Collect</h2>
+      </div>
+      <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed opacity-85 mb-3">
+        When you place an order or browse Sonu Book Store, we collect standard account and transaction details, including:
+      </p>
+      <ul style="color: var(--text-body);" class="list-disc pl-6 text-sm sm:text-base space-y-1 opacity-80">
+        <li>Contact details: Name, email address, phone number, and delivery addresses.</li>
+        <li>Order data: Books purchased, order dates, and shipping tracking information.</li>
+        <li>Technical logs: IP address, device type, and browser preferences to improve site performance.</li>
+      </ul>
+    </div>
+
+    <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div style="color: var(--pink); background-color: var(--pink-light);" class="w-10 h-10 rounded-lg flex items-center justify-center text-lg">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h2 style="color: var(--text-heading);" class="text-xl font-bold font-serif">2. How We Use Your Data</h2>
+      </div>
+      <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed opacity-85 mb-3">
+        Your data is processed strictly for fulfilling our service to you:
+      </p>
+      <ul style="color: var(--text-body);" class="list-disc pl-6 text-sm sm:text-base space-y-1 opacity-80">
+        <li>Processing, packaging, and delivering your book orders accurately.</li>
+        <li>Sending order confirmations, tracking alerts, and invoice details.</li>
+        <li>Providing customer assistance and handling return/replacement requests.</li>
+      </ul>
+    </div>
+
+    <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div style="color: var(--mint); background-color: var(--bg-main);" class="w-10 h-10 rounded-lg flex items-center justify-center text-lg">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h2 style="color: var(--text-heading);" class="text-xl font-bold font-serif">3. Payment & Third-Party Security</h2>
+      </div>
+      <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed opacity-85">
+        We do not store your debit card, credit card, or UPI credentials. All transactions are securely routed through encrypted, industry-standard payment gateways. We never sell, rent, or trade your personal details to third-party advertisers.
+      </p>
+    </div>
+
+    <div style="background-color: var(--bg-card);" class="border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div style="color: var(--pink); background-color: var(--pink-light);" class="w-10 h-10 rounded-lg flex items-center justify-center text-lg">
+          <i class="fa-solid fa-envelope-open-text"></i>
+        </div>
+        <h2 style="color: var(--text-heading);" class="text-xl font-bold font-serif">4. Contact Our Privacy Officer</h2>
+      </div>
+      <p style="color: var(--text-body);" class="text-sm sm:text-base leading-relaxed opacity-85">
+        For questions or requests regarding your personal records, reach out directly at <strong style="color: var(--pink);">support@sonubookstore.com</strong>.
+      </p>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
